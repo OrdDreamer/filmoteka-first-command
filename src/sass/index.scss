@@ -1,9 +1,20 @@
-@import "./common";
+@import "utils/variables";
+@import "utils/mixins";
+@import "utils/placeholders";
+@import "utils/vissually-hiden";
 
-@import "header";
-@import "item-container";
-@import "film-item";
-@import "footer";
-@import "loader";
-@import "film-info-modal";
-@import "team-info-modal";
+@import "base/common";
+@import "base/container";
+
+@import "components/backdrop";
+@import "components/primary-button";
+@import "components/secondary-button";
+@import "components/rating-block";
+
+@import "layout/header";
+@import "layout/item-container";
+@import "layout/film-item";
+@import "layout/footer";
+@import "layout/loader";
+@import "layout/film-info-modal";
+@import "layout/team-info-modal";

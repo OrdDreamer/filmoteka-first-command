@@ -1,0 +1,23 @@
+.container {
+  @extend %centering-x;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+@include media-from-mobile-resolution() {
+  .container {
+    width: 440px;
+  }
+}
+
+@include media-from-tablet-resolution {
+  .container {
+    width: 704px;
+  }
+}
+
+@include media-from-desktop-resolution {
+  .container {
+    width: 1216px;
+  }
+}

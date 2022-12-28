@@ -1,0 +1,71 @@
+@mixin pseudo($display: block, $pos: absolute, $content: '') {
+  content: $content;
+  display: $display;
+  position: $pos;
+}
+
+@mixin input-placeholder {
+  &::placeholder {
+    @content;
+  }
+  &:-moz-placeholder {
+    @content;
+  }
+  &::-moz-placeholder {
+    @content;
+  }
+  &:-ms-input-placeholder {
+    @content;
+  }
+  &::-webkit-input-placeholder {
+    @content;
+  }
+}
+
+@mixin media-to-mobile-resolution {
+  @media screen and (max-width: 319px) {
+    @content;
+  }
+}
+
+@mixin media-in-mobile-resolution {
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    @content;
+  }
+}
+
+@mixin media-from-mobile-resolution {
+  @media screen and (min-width: 320px) {
+    @content;
+  }
+}
+
+@mixin media-to-tablet-resolution {
+  @media screen and (max-width: 767px) {
+    @content;
+  }
+}
+
+@mixin media-in-tablet-resolution {
+  @media screen and (min-width: 768px) and (max-width: 1279px) {
+    @content;
+  }
+}
+
+@mixin media-from-tablet-resolution {
+  @media screen and (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin media-to-desktop-resolution {
+  @media screen and (max-width: 1279px) {
+    @content;
+  }
+}
+
+@mixin media-from-desktop-resolution {
+  @media screen and (min-width: 1280px) {
+    @content;
+  }
+}
