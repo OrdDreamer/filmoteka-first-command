@@ -7,20 +7,32 @@ export default class FilmotekaAPI {
 
 
 
+// apiKey, 
 
 
-  //   constructor(apiKey) {
-  //   this._apiKey = apiKey;
-  // }
-    // constructor({title, id, poster , vote, votes, popularity ,originalTitle, genre, about }) {
+//     constructor({title, id, poster , vote, votes, popularity ,originalTitle, genre, about }) {
+// this.title = title;
+// this.id = id;
+// this.poster = poster;
+// this.vote = vote;
+// this.votes = votes,
+// this.popularity = popularity;
+// this.originalTitle = originalTitle;
+// this.genre = genre;
+// this.about = about;
+// this._apiKey = apiKey;
+// this.query = '';
+// this.page = 1;
+// this.per_page = 40;
+
 
     // }
 
 // якщо не передавати параметра повертає масив обєктів за день, якщо true за тиждень
     async getMostPopular(timeWeek)  {
         try {
-          let searchTime = `trending/movie/day?api_key=${API_KEY}`;
-          if (timeWeek) {searchTime = `trending/movie/week?api_key=${API_KEY}`} 
+          let searchTime = `trending/movie/day?api_key=${API_KEY}&page=${this.page}`;
+          if (timeWeek) {searchTime = `trending/movie/week?api_key=${API_KEY}&page=${this.page}`} 
           const response = await axios.get(
             searchTime
 
@@ -45,7 +57,7 @@ export default class FilmotekaAPI {
     async searchMovie(query)  {
         try {
           const response = await axios.get(
-            `search/movie?api_key=${API_KEY}&query=${query}`
+            `search/movie?api_key=${API_KEY}&query=${query}&page=${this.page}`
           );
           return response.data;
         } catch (error) {
@@ -97,5 +109,7 @@ async getVideo(movie_id)  {
 }
 
 test = new FilmotekaAPI;
-const arr = test.getVideo(550)
+const arr = test.getVideo(500)
 console.log(arr)
+console.log(Object.values(arr)) 
+
