@@ -16,6 +16,23 @@ export default class FilmotekaAPI {
 
     // }
 
+// якщо не передавати параметра повертає масив обєктів за день, якщо true за тиждень
+    async getMostPopular(timeWeek)  {
+        try {
+          let searchTime = `trending/movie/day?api_key=${API_KEY}`;
+          if (timeWeek) {searchTime = `trending/movie/week?api_key=${API_KEY}`} 
+          const response = await axios.get(
+            searchTime
+
+          //   `popular?api_key=${API_KEY}`
+          // );
+          );
+          return response.data;
+        } catch (error) {
+          throw new Error(error.message);
+        }
+      }
+
 
     // searchMovie(name){
     //     return `${this.URL} `
@@ -24,48 +41,45 @@ export default class FilmotekaAPI {
     // https://api.themoviedb.org/3/search/movie?api_key=<<api_key>>
 
 
-    // // Пошук фільму за назвою
-    // async searchMovie(query)  {
-    //     try {
-    //       const response = await axios.get(
-    //         `search/movie?api_key=${API_KEY}&query=${query}`
-    //       );
-    //       return response.data;
-    //     } catch (error) {
-    //       throw new Error(error.message);
-    //     }
-    //   }
-
-// // якщо не передавати параметра повертає масив обєктів за день, якщо true за тиждень
-//     async getMostPopular(timeWeek)  {
-//         try {
-//           let searchTime = `trending/movie/day?api_key=${API_KEY}`;
-//           if (timeWeek) {searchTime = `trending/movie/week?api_key=${API_KEY}`} 
-//           const response = await axios.get(
-//             searchTime
-
-//           //   `popular?api_key=${API_KEY}`
-//           // );
-//           );
-//           return response.data;
-//         } catch (error) {
-//           throw new Error(error.message);
-//         }
-//       }
-    
-
-    async getInfo(movie_id)  {
+    // Пошук фільму за ключовим словом
+    async searchMovie(query)  {
         try {
           const response = await axios.get(
-// `https://api.themoviedb.org/3/movie/3/videos?api_key=${API_KEY}`
-`movie/${movie_id}/videos?api_key=${API_KEY}`
-
+            `search/movie?api_key=${API_KEY}&query=${query}`
           );
-          return response.data.results;
+          return response.data;
         } catch (error) {
           throw new Error(error.message);
         }
       }
+
+
+    
+// Отримання повної інформації кінофільму за допомогою ID
+    async getInfo(movie_id)  {
+        try {
+          const response = await axios.get(
+`movie/${movie_id}?api_key=${API_KEY}`
+          );
+          return response.data;
+        } catch (error) {
+          throw new Error(error.message);
+        }
+      }
+
+
+// Отримання відеомедіафайлу
+async getVideo(movie_id)  {
+  try {
+    const response = await axios.get(
+`movie/${movie_id}/videos?api_key=${API_KEY}`
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
     
       async getReview(movie_id){
         try {
@@ -83,5 +97,5 @@ export default class FilmotekaAPI {
 }
 
 test = new FilmotekaAPI;
-const arr = test.getInfo(550)
+const arr = test.getVideo(550)
 console.log(arr)
