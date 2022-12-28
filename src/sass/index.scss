@@ -1,2 +1,9 @@
 @import './common';
-@import './example';
+
+@import "header";
+@import "item-container";
+@import "film-item";
+@import "footer";
+@import "loader";
+@import "film-info-modal";
+@import "team-info-modal";
