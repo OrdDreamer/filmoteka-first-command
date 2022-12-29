@@ -1,0 +1,37 @@
+.footer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    color: #545454;
+    background-color: #F7F7F7;
+}
+
+@include media-from-tablet-resolution {
+    .footer {
+        flex-direction: row;
+        gap: 5px;
+        justify-content: center;
+    }
+}
+
+.footer-devs {
+    display: flex;
+    gap: 10px;
+}
+
+.footer-devs-modal {
+    color: inherit;
+
+    &:hover,
+    &:focus{
+        color: var(--accent-color);
+    }
+}
+
+.footer-devs-icon {
+    width: 14px;
+    height: 13px;
+}
