@@ -1,9 +1,9 @@
 <header class="header-container">
   <div class="header-container_div">
-    <a href="" class="link filmoteka">
-      <svg class="header-svg">
+    <a href="/src/index.html" class="link filmoteka">
+      <svg class="header-svg_film">
         <use href="../src/image/header/symbol-defs.svg#icon-film"></use>
-      </svg>Filmoteka</a>
+      </svg><span class="filmoteka-span">Filmoteka</span></a>
     <nav class="header-navigation">
       <ul class="header-navigation_list list">
         <li><button type="button" class="header-btn">Sign In</button></li>
@@ -11,6 +11,10 @@
       </ul>
     </nav>
   </div>
-  <input type="text" class="header-input" placeholder="Movie search">
+  <label class="header-label">
+    <input type="text" class="header-input" placeholder="Movie search">
+    <svg class="header-svg_search"><use href="../src/image/header/symbol-defs.svg#icon-search"></use>
+  </svg></label>
+  
   </svg>
 </header>
