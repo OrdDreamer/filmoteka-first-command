@@ -1,97 +1,95 @@
-<section class="film-modal">
-  <h2>Film info modal section</h2>
-  <button class="open-modal" data-modal-open>Open modal</button>
-  <div class="backdrop" data-modal>
-    <div class="film-info-modal">
-      <button class="close-modal" data-modal-close>
-        <svg class="close-modal-icon" width="20" height="20">
-          <use href="./film-modal-images/symbol-defs.svg#close-line"></use>
-        </svg>
-      </button>
-      <div class="side-container">
-        <div class="left-side">
-          <div class="overflow">
-            <div id="play-button-container">
-              <svg id="button-circle-svg" viewBox="0 0 100 100">
-                <style type="text/css">
-                  .st0 {
-                    fill: #dddddd;
-                    stroke: #010101;
-                    stroke-width: 0px;
-                  }
-                </style>
-                <circle id="button-circle" class="st0" cx="50" cy="50" r="50" />
-              </svg>
+<button class="open-modal" data-modal-open>Open modal</button>
+<div class="backdrop" data-modal>
+  <div class="film-modal">
+    <button class="close-modal" data-modal-close>
+      <svg class="close-modal-icon" width="20" height="20">
+        <use href="./film-modal-images/symbol-defs.svg#close-line"></use>
+      </svg>
+    </button>
+    <div class="side-container">
+      <div class="left-side">
+        <div class="overflow">
+          <div id="play-button-container">
+            <svg id="button-circle-svg" viewBox="0 0 100 100">
+              <style type="text/css">
+                .st0 {
+                  fill: #dddddd;
+                  stroke: #010101;
+                  stroke-width: 0px;
+                }
+              </style>
+              <circle id="button-circle" class="st0" cx="50" cy="50" r="50" />
+            </svg>
 
-              <svg id="play-triangle-svg" viewBox="0 0 100 100">
-                <style>
-                  #play-triangle {
-                    fill: black;
-                  }
-                  #triangle-tween-target {
-                    display: none;
-                  }
-                </style>
-                <polygon id="play-triangle" points="37,74.1 76.8,51.1 37,28.2 " />
-                <rect id="triangle-tween-target" x="47.6" y="46.7" width="16" height="9" />
-              </svg>
+            <svg id="play-triangle-svg" viewBox="0 0 100 100">
+              <style>
+                #play-triangle {
+                  fill: black;
+                }
+                #triangle-tween-target {
+                  display: none;
+                }
+              </style>
+              <polygon id="play-triangle" points="37,74.1 76.8,51.1 37,28.2 " />
+              <rect id="triangle-tween-target" x="47.6" y="46.7" width="16" height="9" />
+            </svg>
 
-              <iframe
-                id="youtube-video"
-                width="560"
-                height="315"
-                src="https://www.youtube.com/embed/Mh4f9AYRCZY?enablejsapi=1"
-                frameborder="0"
-                gesture="media"
-                allow="encrypted-media"
-                allowfullscreen
-              ></iframe>
-            </div>
+            <iframe
+              class="film-trailer"
+              id="youtube-video"
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/Mh4f9AYRCZY?enablejsapi=1"
+              frameborder="0"
+              gesture="media"
+              allow="encrypted-media"
+              allowfullscreen
+            ></iframe>
           </div>
-          <picture>
-            <source srcset="./film-modal-images/desktop.jpg 1x" media="(min-width: 1280px)" />
-            <source srcset="./film-modal-images/tablet.jpg 1x" media="(min-width: 768px)" />
-            <source srcset="./film-modal-images/mobile.jpg 1x" media="(min-width: 320px)" />
-            <img class="film-img" src="./film-modal-images/mobile.jpg" alt="card image" />
-          </picture>
         </div>
-        <div class="right-side">
-          <h2 class="title">A FISTFUL OF LEAD</h2>
-          <div class="film-info">
-            <div class="votes">
-              <p class="film-text">Vote / Votes</p>
-              <p class="film-votes film-text">
-                <span class="film-rating film-text">7.3</span> / <span class="rating">1260</span>
-              </p>
-            </div>
-            <div class="popularity">
-              <p class="film-text">Popularity</p>
-              <p class="film-text-color film-text">100.2</p>
-            </div>
-            <div class="original-title">
-              <p class="film-text">Original Title</p>
-              <p class="film-text-color film-text">A FISTFUL OF LEAD</p>
-            </div>
-            <div class="genre">
-              <p class="film-text">Genre</p>
-              <p class="film-text-color film-text">Western</p>
-            </div>
+        <picture class="film-image">
+          <source srcset="./film-modal-images/desktop.jpg 1x" media="(min-width: 1280px)" />
+          <source srcset="./film-modal-images/tablet.jpg 1x" media="(min-width: 768px)" />
+          <source srcset="./film-modal-images/mobile.jpg 1x" media="(min-width: 320px)" />
+          <img class="film-img" src="./film-modal-images/mobile.jpg" alt="card image" />
+        </picture>
+      </div>
+      <div class="right-side">
+        <h2 class="film-title">A FISTFUL OF LEAD</h2>
+        <div class="film-info">
+          <div class="votes">
+            <p class="film-text">Vote / Votes</p>
+            <p class="film-votes film-text">
+              <span class="film-rating film-text">7.3</span> / <span class="rating">1260</span>
+            </p>
           </div>
-          <p class="about-title">About</p>
-          <p class="about-info">
-            Four of the West’s most infamous outlaws assemble to steal a huge stash of gold from the
-            most corrupt settlement of the gold rush towns. But not all goes to plan one is killed
-            and the other three escapes with bags of gold hide out in the abandoned gold mine where
-            they happen across another gang of three – who themselves were planning to hit the very
-            same bank! As tensions rise, things go from bad to worse as they realise the bags of
-            gold are filled with lead... they’ve been double crossed – but by who and how?
-          </p>
-          <div class="btn-container">
-            <button class="btn-watched">add to Watched</button>
-            <button class="btn-queue">add to queue</button>
+          <div class="popularity">
+            <p class="film-text">Popularity</p>
+            <p class="film-text-color film-text">100.2</p>
           </div>
+          <div class="original-title">
+            <p class="film-text">Original Title</p>
+            <p class="film-text-color film-text">A FISTFUL OF LEAD</p>
+          </div>
+          <div class="genre">
+            <p class="film-text">Genre</p>
+            <p class="film-text-color film-text">Western</p>
+          </div>
+        </div>
+        <p class="about-film">About</p>
+        <p class="about-film-info">
+          Four of the West’s most infamous outlaws assemble to steal a huge stash of gold from the
+          most corrupt settlement of the gold rush towns. But not all goes to plan one is killed and
+          the other three escapes with bags of gold hide out in the abandoned gold mine where they
+          happen across another gang of three – who themselves were planning to hit the very same
+          bank! As tensions rise, things go from bad to worse as they realise the bags of gold are
+          filled with lead... they’ve been double crossed – but by who and how?
+        </p>
+        <div class="btn-container">
+          <button class="btn-watched">add to Watched</button>
+          <button class="btn-queue">add to queue</button>
         </div>
       </div>
     </div>
   </div>
-</section>
+</div>
