@@ -1,15 +1,9 @@
-.preloader,
-.preloader_percents {
+.preloader {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   transition: all 0.5s;
-}
-.preloader_percents {
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 30px;
-  font-weight: 700;
 }
 
 @keyframes preloader_loader {
