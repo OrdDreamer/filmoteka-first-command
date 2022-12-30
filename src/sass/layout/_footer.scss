@@ -12,17 +12,17 @@
 @include media-from-tablet-resolution {
     .footer {
         flex-direction: row;
-        gap: 5px;
+        gap: 0px;
         justify-content: center;
     }
 }
 
-.footer-devs {
+.footer__devs {
     display: flex;
     gap: 10px;
 }
 
-.footer-devs-modal {
+.footer__modal {
     color: inherit;
 
     &:hover,
@@ -31,7 +31,7 @@
     }
 }
 
-.footer-devs-icon {
+.footer__icon {
     width: 14px;
     height: 13px;
     animation: heartbeat 1000ms infinite 0ms;
