@@ -1,0 +1,56 @@
+.preloader,
+.preloader_percents {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.5s;
+}
+.preloader_percents {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+@keyframes preloader_loader {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+.preloader_loader .preloader_loader-run {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border: 10px solid rgb(0, 7, 138);
+  border-top-color: transparent;
+  border-radius: 50%;
+}
+.preloader_loader .preloader_loader-run {
+  animation: loader 1.2195121951219512s linear infinite;
+  top: 100px;
+  left: 100px;
+}
+.preloader_loading-spinner {
+  width: 200px;
+  height: 200px;
+  display: inline-block;
+  overflow: hidden;
+  background: rgba(241, 242, 243, 0);
+}
+.preloader_loader {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: translateZ(0) scale(1);
+  backface-visibility: hidden;
+  transform-origin: 0 0;
+}
+
+.preloader-invisible {
+  opacity: o;
+  visibility: hidden;
+  z-index: -1;
+}
