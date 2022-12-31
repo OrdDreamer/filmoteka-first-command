@@ -166,6 +166,16 @@
   .title {
     margin-top: 20px;
   }
+
+  #youtube-video {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    top: -65px;
+    left: -50px;
+    width: 200px;
+    height: 250px;
+  }
 }
 
 @include media-from-tablet-resolution {
