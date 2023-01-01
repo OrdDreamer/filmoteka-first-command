@@ -202,32 +202,3 @@ export default class FilmotekaAPI {
   }
 }
 
-test = new FilmotekaAPI();
-const arr = test.getMostPopular();
-console.log('out1', arr);
-test.setCurrentID(744594);
-const arr2 = test.searchMovie('fast and furious');
-test.setCurrentID(169822);
-console.log('out2', arr2);
-const arr3 = test.getPoster(600);
-console.log('out3', arr3);
-const arr4 = test.getVideo();
-console.log('out4', arr4);
-const arr5 = test.getInfoCardGallery(600);
-console.log('out5', arr5);
-
-const arr10 = test.getInfoCardGallery(530);
-console.log('out10', arr10);
-const arr11 = test.getInfoCardGallery(560);
-console.log('out11', arr11);
-const arr12 = test.getInfoCardGallery(550);
-console.log('out12', arr12);
-
-// async getReview(movie_id) {
-//   try {
-//     const response = await axios.get(`movie/${movie_id}/reviews?api_key=${this._apiKey}`);
-//     return response.data;
-//   } catch (error) {
-//     throw new Error(error.message);
-//   }
-// }
