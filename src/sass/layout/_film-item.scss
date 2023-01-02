@@ -1,4 +1,4 @@
-.film-card_link {
+.film-card__link {
   display: inline-block;
 
   transition: var(--transition-dur-and-fun);
@@ -17,11 +17,9 @@
 }
 
 .film-card__name {
-  line-height: 1.33;
-
-  //   font-family: var(--primary-font);
   font-weight: 500;
   font-size: 12px;
+  line-height: 1.33;
   color: var(--primary-text-color-theme-light);
   text-transform: uppercase;
 
@@ -42,10 +40,10 @@
   }
 }
 
-.film-card__divider {
-  margin-left: 5px;
-  margin-right: 5px;
-}
+// .film-card__divider {
+//   margin-left: 5px;
+//   margin-right: 5px;
+// }
 
 .film-card__year {
   margin-right: 9px;
