@@ -1,0 +1,17 @@
+.anchor-link {
+  position: fixed;
+  top: 90%;
+  left: 90%;
+  transform: translate(-50%, -50%);
+}
+
+.anchor-link__icon {
+  fill: var(--accent-color);
+
+  transition: fill var(--transition-dur-and-fun);
+
+  .anchor-link:hover &,
+  .anchor-link:focus {
+    fill: var(--accent-focus-color);
+  }
+}
