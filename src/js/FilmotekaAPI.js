@@ -158,6 +158,15 @@ export default class FilmotekaAPI {
       throw new Error(error.message);
     }
   }
+// повертає список жанрів
+async getGeners() {
+  try{
+    const response = await axios.get(`genre/movie/list?api_key=${this._apiKey}&language=${this.language}`);
+    return response.data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
 
   // додає сторінку
 
@@ -202,3 +211,5 @@ export default class FilmotekaAPI {
   }
 }
 
+const test = new FilmotekaAPI;
+console.log(test.getGeners())
