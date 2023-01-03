@@ -10,3 +10,25 @@ for (let anchor of anchors) {
     });
   });
 }
+
+let scrollpos = window.scrollY;
+
+const anchorLinkEl = document.querySelector('.anchor-link');
+const scrollChange = 1;
+
+const addClassOnScroll = () => {
+  anchorLinkEl.classList.add('hide');
+};
+const removeClassOnScroll = () => {
+  anchorLinkEl.classList.remove('hide');
+};
+
+window.addEventListener('scroll', function () {
+  scrollpos = window.scrollY;
+
+  if (scrollpos > scrollChange) {
+    removeClassOnScroll();
+  } else {
+    addClassOnScroll();
+  }
+});
