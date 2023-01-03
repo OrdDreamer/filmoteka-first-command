@@ -1,20 +1,22 @@
-@import "utils/variables";
-@import "utils/mixins";
-@import "utils/placeholders";
-@import "utils/vissually-hiden";
+@import 'utils/variables';
+@import 'utils/mixins';
+@import 'utils/placeholders';
+@import 'utils/vissually-hiden';
 
-@import "base/common";
-@import "base/container";
+@import 'base/common';
+@import 'base/container';
 
-@import "components/backdrop";
-@import "components/primary-button";
-@import "components/secondary-button";
-@import "components/rating-block";
+@import 'components/backdrop';
+@import 'components/primary-button';
+@import 'components/secondary-button';
+@import 'components/rating-block';
 
-@import "layout/header";
-@import "layout/item-container";
-@import "layout/film-item";
-@import "layout/footer";
-@import "layout/loader";
-@import "layout/film-info-modal";
-@import "layout/team-info-modal";
+@import 'layout/header';
+@import 'layout/item-container';
+@import 'layout/film-item';
+@import 'layout/footer';
+@import 'layout/loader';
+@import 'layout/film-info-modal';
+@import 'layout/team-info-modal';
+
+@import 'components/anchor';
