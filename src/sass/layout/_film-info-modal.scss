@@ -1,0 +1,263 @@
+.film-modal {
+  width: 280px;
+  padding: 48px 20px 20px 20px;
+  position: relative;
+
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  transition: transform var(--transition-dur-and-fun);
+
+  background-color: var(--primary-text-color-theme-dark);
+}
+
+.close-modal {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: transparent;
+  border: none;
+  width: 30px;
+  height: 30px;
+}
+
+.film-title {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+.film-info {
+  margin-top: 20px;
+}
+
+.votes {
+  display: flex;
+  gap: 40px;
+}
+
+.film-text {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.33;
+  color: #8c8c8c;
+}
+
+.film-text-color {
+  color: var(--primary-text-color-theme-light);
+}
+
+.film-rating {
+  padding: 1px 10px;
+  background-color: var(--accent-color);
+  border-radius: 5px;
+  color: var(--primary-text-color-theme-dark);
+}
+
+.rating {
+  padding: 1px 4px;
+  color: var(--primary-text-color-theme-light);
+  background-color: #f7f7f7;
+  border-radius: 5px;
+}
+
+.popularity {
+  margin-top: 9px;
+  display: flex;
+  gap: 51px;
+}
+
+.original-title {
+  margin-top: 9px;
+  display: flex;
+  gap: 39px;
+}
+
+.genre {
+  margin-top: 9px;
+  display: flex;
+  gap: 75px;
+}
+
+.about-film {
+  margin-top: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.33;
+  text-transform: uppercase;
+}
+
+.about-film-info {
+  margin-top: 8px;
+  max-width: 240px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.66;
+}
+
+.btn-container {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.btn-watched {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.33;
+  text-transform: uppercase;
+  width: 110px;
+  height: 44px;
+  background-color: var(--accent-color);
+  color: var(--primary-text-color-theme-dark);
+  border-radius: 5px;
+  border: none;
+}
+
+.btn-queue {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.33;
+  text-transform: uppercase;
+  width: 110px;
+  height: 44px;
+  background-color: var(--primary-text-color-theme-dark);
+  color: var(--primary-text-color-theme-light);
+  border-radius: 5px;
+}
+
+#play-button-container {
+  position: absolute;
+  top: 110px;
+  left: 70px;
+  width: 100px;
+  height: 100px;
+  opacity: 0.7;
+
+  transition: opacity var(--transition-dur-and-fun);
+}
+
+#play-button-container:hover {
+  cursor: pointer;
+  opacity: 1;
+}
+
+#button-circle-svg,
+#play-triangle-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#youtube-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#youtube-video.-visible {
+  pointer-events: auto;
+}
+
+@include media-in-mobile-resolution {
+  .title {
+    margin-top: 20px;
+  }
+
+  #youtube-video {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    top: -65px;
+    left: -50px;
+    width: 200px;
+    height: 250px;
+  }
+}
+
+@include media-from-tablet-resolution {
+  #play-button-container {
+    top: 100px;
+    left: 80px;
+  }
+
+  .film-modal {
+    width: 704px;
+  }
+
+  .close-modal {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background-color: transparent;
+    border: none;
+    width: 30px;
+    height: 30px;
+  }
+  .side-container {
+    display: flex;
+    gap: 68px;
+  }
+
+  .btn-container {
+    gap: 15px;
+  }
+
+  .btn-watched {
+    width: 125px;
+  }
+
+  .btn-queue {
+    width: 125px;
+  }
+}
+
+@include media-from-desktop-resolution {
+  .film-modal {
+    width: 806px;
+    padding: 40px 12px;
+  }
+
+  .close-modal {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background-color: transparent;
+    border: none;
+    width: 30px;
+    height: 30px;
+  }
+
+  .side-container {
+    display: flex;
+    gap: 16px;
+  }
+
+  .about-film-info {
+    max-width: 391px;
+  }
+
+  .btn-container {
+    gap: 15px;
+  }
+
+  .btn-watched {
+    width: 136px;
+  }
+
+  .btn-queue {
+    width: 136px;
+  }
+
+  #play-button-container {
+    top: 160px;
+    left: 140px;
+  }
+}
+
+.left-side {
+  position: relative;
+}
