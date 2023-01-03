@@ -10,7 +10,7 @@
             "messengers": [
                 [
                     "telegram",
-                    "@OrdDreamer"
+                    "https://t.me/OrdDreamer"
                 ]
             ],
             "role": [
@@ -28,7 +28,7 @@
             "messengers": [
                 [
                     "telegram",
-                    "@vysochanska"
+                    "https://t.me/vysochanska"
                 ]
             ],
             "role": [
