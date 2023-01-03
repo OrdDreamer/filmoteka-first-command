@@ -1,0 +1,42 @@
+<section>
+  <h2>Card example markup</h2>
+  <div class="container">
+    <div class="film-card">
+      <a href="#" class="film-card__link link" data-id="1">
+        <picture class="film-card__picture">
+          <source
+            srcset="
+              ./images/card/desktop/rectangleDesktop5@1x.jpg 1x,
+              ./images/card/desktop/rectangleDesktop5@2x.jpg 2x
+            "
+            media="(min-width: 1280px"
+          />
+          <source
+            srcset="
+              ./images/card/tablet/rectangleTablet@1x.jpg 1x,
+              ./images/card/tablet/rectangleTablet@2x.jpg 2x
+            "
+            media="(min-width: 768px"
+          />
+          <source
+            srcset="
+              ./images/card/mobile/rectangleMobile@1x.jpg 1x,
+              ./images/card/mobile/rectangleMobile@2x.jpg 2x
+            "
+            media="(min-width: 320px"
+          />
+          <img
+            src="./images/card/mobile/rectangleMobile@1x.jpg"
+            alt="man at the sea with warships"
+            class="filmoteka__image"
+          />
+        </picture>
+        <p class="film-card__name">GREYHOUND</p>
+        <p class="film-card__data">
+          Drama, Action <span class="film-card__divider">&nbsp;|&nbsp;</span>
+          <span class="film-card__year">2020</span><span class="film-card__rating">10.0</span>
+        </p>
+      </a>
+    </div>
+  </div>
+</section>
