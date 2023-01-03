@@ -7,12 +7,5 @@ import { showAuthBlock, showNavBlock } from './js/header';
 
 import { addListenerOnInputSearch } from './js/search';
 
-onInputSearch((query) => {
-    
-    console.log(' 1 function: ',query)
-})
+showAuthBlock()
 
-onInputSearch((query) => {
-    
-    console.log(' 2 function: ',query)
-})

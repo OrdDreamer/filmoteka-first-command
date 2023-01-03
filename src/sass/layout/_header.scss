@@ -113,6 +113,7 @@
 
     position: absolute;
     right: 0;
+    top: 22;
 
 
     transition: stroke var(--transition-dur-and-fun);
@@ -149,11 +150,6 @@
     }
 
 }
-
-// .list .link {
-//     display: none;
-// }
-
 
 .header-navigation_list {
     display: flex;
@@ -264,10 +260,29 @@
     text-align: center;
 }
 
+.header .user-box{
+    margin-top: 40px;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 280px;
+
+    @include media-from-tablet-resolution {
+        max-width: 336px;
+    }
+    
+    @include media-from-desktop-resolution {
+        max-width: 394px;
+    }
+}
+
+.header .user-box,
 .login-box .user-box {
     position: relative;
 }
 
+.header .user-box input,
 .login-box .user-box input {
     width: 100%;
     padding: 10px 0;
@@ -275,14 +290,27 @@
     color: #fff;
     margin-bottom: 30px;
     border: none;
-    border-bottom: 1px solid var(--accent-color);
+    border-bottom: 2px solid var(--primary-text-color-theme-dark);
     outline: none;
     background: transparent;
+
+    &:hover,
+    &:focus {
+        border-bottom: 2px solid var(--accent-color);
+    }
+
+        &:hover+.logo__search,
+        &:focus+.logo__search {
+            // border-color: var(--accent-color);
+            stroke: var(--accent-color);
+    
+        }
 }
 
+.header .user-box label,
 .login-box .user-box label {
     position: absolute;
-    top: 0;
+    top: 8px;
     left: 0;
     padding: 10px 0;
     font-size: 16px;
@@ -291,6 +319,9 @@
     transition: .5s;
 }
 
+
+.header .user-box input:focus ~ label,
+.header .user-box input:valid ~ label,
 .login-box .user-box input:focus ~ label,
 .login-box .user-box input:valid ~ label {
     top: -20px;
