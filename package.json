@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "modern-normalize": "^1.1.0",
-    "vanilla-tilt": "^1.8.0"
+    "vanilla-tilt": "^1.8.0",
     "axios": "^1.2.1"
   },
   "devDependencies": {
