@@ -1,12 +1,15 @@
 import FilmotekaAPI from './js/FilmotekaAPI';
-import { getFilmItemElement } from './js/film-item';
+import { getFilmItemElement } from "./js/film-item";
 import { anchors, scrollpos } from './js/anchor';
+import { showAuthBlock, showNavBlock } from './js/header';
+
+import { addListenerOnInputSearch } from './js/search';
 
 import { getAuth } from 'firebase/auth';
 import { initFirebase } from './js/firebase';
 import { userSignIn, userSignOut } from './js/auth';
 
-
+showAuthBlock()
 
 
 
@@ -32,26 +35,3 @@ class App {
 }
 
 new App();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

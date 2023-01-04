@@ -1,3 +1,91 @@
-<section>
-  <h2>Header section</h2>
-</section>
+<header class="header">
+  <div class="header-container">
+    <a href="/src/index.html" class="link filmoteka">
+      <svg class="logo__film">
+        <use href="../src/image/header/symbol-defs.svg#icon-film"></use>
+      </svg><span class="filmoteka-span">Filmoteka</span></a>
+    <nav class="header-navigation">
+      <ul class="header-navigation_list list">
+        <!-- no authorization 
+        notAuthorization(); - js
+        -->
+        <li><button type="button" class="header-btn" data-login-open>LOGIN</button></li>
+        <li><button type="button" class="header-btn" data-registration-open>REGISTRATION</button></li>
+        <!-- authorization 
+        autorization(); - js
+        -->
+
+      </ul>
+    </nav>
+  </div>
+  <div class="user-box">
+    <input type="text" id="usernamelogin" class="header-search__input" required="">
+    <label>Movie search</label>
+    <svg class="logo__search">
+      <use href="../src/image/header/symbol-defs.svg#icon-search"></use>
+    </svg>
+  </div>
+  <!-- <label class="header-search">
+    <input type="text" class="header-search__input" placeholder="Movie search">
+    <svg class="logo__search"><use href="../src/image/header/symbol-defs.svg#icon-search"></use>
+  </svg></label> -->
+  
+  <div class="backdrop is-hidden" data-login>
+    <div class="login-box">
+      <button class="login-btn" data-login-close>
+        <svg class="login-btn-svg" width="11" height="11">
+          <use href="../src/image/header/symbol-defs.svg#icon-close"></use>
+        </svg>
+      </button>
+      <h2>LOGIN</h2>
+      <form>
+        <div class="user-box">
+          <input type="text" id="usernamelogin" name="user_name_login" required="">
+          <label>Username</label>
+        </div>
+        <div class="user-box">
+          <input type="text" id="userpasswordlogin" name="user_password_login" required="">
+          <label>Password</label>
+        </div>
+        <button type="submit" class="login-submit">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          Login
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div class="backdrop is-hidden" data-registration>
+    <div class="login-box">
+      <button class="login-btn" data-registration-close>
+        <svg class="login-btn-svg" width="11" height="11">
+          <use href="../src/image/header/symbol-defs.svg#icon-close"></use>
+        </svg>
+      </button>
+      <h2>REGISTRATION</h2>
+      <form>
+        <div class="user-box">
+          <input type="text" id="usernamereg" name="user_name_reg" required="" pattern="^[a-zA-Zа-яА-Я]+" minlength="2">
+          <label>Username</label>
+        </div>
+        <div class="user-box">
+          <input type="email" id="useremailreg" name="user_email_reg" required="" title="....@gmail.com">
+          <label>Email</label>
+        </div>
+        <div class="user-box">
+          <input type="text" id="userpasswordreg" name="user_password_reg" required="">
+          <label>Password</label>
+        </div>
+        <button type="submit" class="login-submit">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          Register
+        </button>
+      </form>
+    </div>
+  </div>

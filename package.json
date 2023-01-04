@@ -18,9 +18,10 @@
     "url": "https://github.com/orddreamer/filmoteka-first-command/issues"
   },
   "dependencies": {
+    "modern-normalize": "^1.1.0",
+    "vanilla-tilt": "^1.8.0",
     "axios": "^1.2.1",
-    "firebase": "^9.15.0",
-    "modern-normalize": "^1.1.0"
+    "firebase": "^9.15.0"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.6.0",
