@@ -9,7 +9,6 @@ import { getAuth } from 'firebase/auth';
 import { initFirebase } from './js/firebase';
 import { userSignIn, userSignOut } from './js/auth';
 
-showAuthBlock()
 
 
 
