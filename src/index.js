@@ -9,6 +9,9 @@ import { getAuth } from 'firebase/auth';
 import { initFirebase } from './js/firebase';
 import { userSignIn, userSignOut } from './js/auth';
 
+import './js/team';
+import './js/modal_team.js';
+
 showAuthBlock()
 
 

@@ -1,0 +1,176 @@
+{
+    "team": [
+        {
+            "name": "Roman",
+            "surname": "Snicarenko",
+            "photo": "https://github.com/OrdDreamer.png",
+            "git": "https://github.com/OrdDreamer",
+            "linkedin": "https://www.linkedin.com/in/roman-snitsarenko",
+            "mail": "roman.snitsarenko@gmail.com",
+            "messengers": [
+                [
+                    "telegram",
+                    "https://t.me/OrdDreamer"
+                ]
+            ],
+            "role": [
+                "Team Lead",
+                "Developer"
+            ]
+        },
+        {
+            "name": "Olga",
+            "surname": "Vysochanska",
+            "photo": "https://github.com/OlgaVysochanska.png",
+            "git": "https://github.com/OlgaVysochanska",
+            "linkedin": "https://www.linkedin.com/in/olga-vysochanska-38152525a/",
+            "mail": "olavysocanska@gmail.com",
+            "messengers": [
+                [
+                    "telegram",
+                    "https://t.me/vysochanska"
+                ]
+            ],
+            "role": [
+                "Scrum master",
+                "Developer"
+            ]
+        },
+        {
+            "name": "Oleksandr",
+            "surname": " Stolyar",
+            "photo": "https://github.com/saniyo.png",
+            "git": "https://github.com/saniyo",
+            "linkedin": "",
+            "mail": "saniyo.in@gmail.com",
+            "messengers": [
+                [
+                    "telegram",
+                    "https://t.me/saniyo_ua"
+                ]
+            ],
+            "role": [
+                "Web Developer"
+            ]
+        },
+        {
+            "name": "Rostyslav",
+            "surname": "Smakula",
+            "photo": "https://github.com/28Rostyk.png",
+            "git": "https://github.com/28Rostyk",
+            "linkedin": "https://www.linkedin.com/in/rostyslav-smakula-2771a8260/",
+            "mail": "smakular@icloud.com",
+            "messengers": [
+                [
+                    "telegram",
+                    "https://t.me/RostyslavSmakula"
+                ]
+            ],
+            "role": [
+                "Web Developer"
+            ]
+        },
+        {
+            "name": "Bogdan",
+            "surname": "Berezka",
+            "photo": "https://github.com/Bogdan8633.png",
+            "git": "https://github.com/Bogdan8633",
+            "linkedin": "https://www.linkedin.com/in/bogdan-berezka/",
+            "mail": "bogdanberezka@gmail.com",
+            "messengers": [
+                [
+                    "telegram",
+                    "https://t.me/Bogdan8633"
+                ]
+            ],
+            "role": [
+                "Web Developer"
+            ]
+        },
+        {
+            "name": "Liubomyr",
+            "surname": "Voitovych",
+            "photo": "https://github.com/DolphiN1000.png",
+            "git": "https://github.com/DolphiN1000",
+            "linkedin": "https://www.linkedin.com/in/%D0%BB%D1%8E%D0%B1%D0%BE%D0%BC%D0%B8%D1%80-%D0%B2%D0%BE%D0%B9%D1%82%D0%BE%D0%B2%D0%B8%D1%87-1646a31b8/",
+            "mail": "DolphiN10001000@Gmail.com",
+            "messengers": [
+                [
+                    "telegram",
+                    "https://t.me/Dolphin10001000"
+                ]
+            ],
+            "role": [
+                "Web Developer"
+            ]
+        },
+        {
+            "name": "Oleksiy",
+            "surname": "Dembnoveckyi",
+            "photo": "https://github.com/AlexDembno.png",
+            "git": "https://github.com/AlexDembno",
+            "linkedin": "https://www.linkedin.com/in/oleksii-dembnovetskyi-219454255/",
+            "mail": "dembnoveckii@gmail.com",
+            "messengers": [
+                [
+                    "telegram",
+                    "https://t.me/dembnovetskyi"
+                ]
+            ],
+            "role": [
+                "Web Developer"
+            ]
+        },
+        {
+            "name": "Andriy",
+            "surname": "Chuiko",
+            "photo": "https://github.com/Andriii888.png",
+            "git": "https://github.com/Andriii888",
+            "linkedin": "www.linkedin.com/in/andrii-chuiko",
+            "mail": "andrii888@gmail.com",
+            "messengers": [
+                [
+                    "telegram",
+                    "https://t.me/AndriiCh888"
+                ]
+            ],
+            "role": [
+                "Web Developer"
+            ]
+        },
+        {
+            "name": "Ivan",
+            "surname": "Panin",
+            "photo": "https://github.com/IvanPanin675.png",
+            "git": "https://github.com/IvanPanin675",
+            "linkedin": "https://www.linkedin.com/in/ivan-panin-60941a256/",
+            "mail": "jovanni.94.van@gmail.com",
+            "messengers": [
+                [
+                    "telegram",
+                    "https://t.me/Ivan_Panin"
+                ]
+            ],
+            "role": [
+                "Web Developer"
+            ]
+        },
+        {
+            "name": "Valentina",
+            "surname": "Dei",
+            "photo": " https://github.com/ValentinaDej.png",
+            "git": "https://github.com/ValentinaDej",
+            "linkedin": "https://www.linkedin.com/in/valentina-dei-5b0399252/",
+            "mail": "safonikv@gmail.com",
+            "messengers": [
+                [
+                    "telegram",
+                    "https://t.me/ValentinaDei"
+                ]
+            ],
+            "role": [
+                "Web Developer"
+            ]
+        }
+    ]
+}
