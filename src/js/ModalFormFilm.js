@@ -23,7 +23,7 @@ document.querySelectorAll('.film-card').forEach(item => {
 
 const instance = basicLightbox.create('', {
   className: 'lightbox',
-  closable: false,
+  closable: true,
   onShow: () => {
     document.addEventListener('keydown', onKeyPress);
     document.body.classList.add('scroll-disable');
