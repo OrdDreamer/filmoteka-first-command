@@ -17,6 +17,7 @@ import './js/modal_team.js';
 class App {
 
   constructor() {
+    this.initHandlebars();
     this.initComponents();
     initFirebase();
     this.auth = getAuth();
@@ -47,6 +48,10 @@ class App {
       authenticate: Boolean(this.user),
       context: "home" // "library"
     });
+  }
+
+  initHandlebars() {
+
   }
 }
 
