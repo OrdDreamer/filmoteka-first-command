@@ -1,0 +1,69 @@
+<div class='contacts'>
+    <h2 class='contacts__title'>
+        Team
+    </h2>
+    <ul class='contacts__list'>
+        {{#each list}}
+        <li class='contacts__item'>
+                <div class="contact-card">
+                    <div class='contact-card__picture'>
+                        <img class='contact-card__img-fluid'
+                            src='{{#if photo}}{{photo}}{{else}}https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png{{/if}}' />
+                    </div>
+                    <div class='contact-card__content'>
+                        <h3 class='contact-card__name'>
+                            {{name}} {{surname}}
+                        </h3>
+                        <ul class='contact-card__title'>
+                            {{#each role}}
+                            <li>
+                                {{this}}
+                            </li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                    <div class='contact-card__bottom'>
+                        <ul class="sn-list">
+                            {{#if git}}
+                            <li class="sn-item">
+                                <a class='contact-card__link--wrapper' href="{{git}}" target='_blank' rel='noreferrer noopener'></a>
+                                <svg class='contact-card__icon'>
+                                    <use href="{{../sprite}}#icon-github"></use>
+                                </svg>
+                                </a>
+                            </li>
+                            {{/if}}
+                            {{#if messengers.[0].[0]}}
+                            <li class="sn-item">
+                                <a class='contact-card__link--wrapper' href="{{messengers.[0].[1]}}" target='_blank' rel='noreferrer noopener'></a>
+                                    <svg class='contact-card__icon'>
+                                        <use href="{{../sprite}}#icon-telegram"></use>
+                                    </svg>
+                                </a>
+                            </li>
+                            {{/if}}
+                            {{#if mail}}
+                            <li class="sn-item">
+                                <a class='contact-card__link--wrapper' href="mailto:{{mail}}" target='_blank' rel='noreferrer noopener'></a>
+                                <svg class='contact-card__icon'>
+                                    <use href="{{../sprite}}#icon-mail"></use>
+                                </svg>
+                                </a>
+                            </li>
+                            {{/if}}
+                            {{#if linkedin}}
+                            <li class="sn-item">
+                                <a class='contact-card__link--wrapper' href="{{linkedin}}" target='_blank' rel='noreferrer noopener'></a>
+                                    <svg class='contact-card__icon'>
+                                        <use href="{{../sprite}}#icon-linkedin"></use>
+                                    </svg>
+                                </a>
+                            </li>
+                            {{/if}}
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        {{/each}}
+    </ul>
+</div>

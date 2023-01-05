@@ -1,45 +1,29 @@
-import VanillaTilt from "vanilla-tilt";
-import headerTemplate from "../partials/header.hbs"
-import Handlebars from "handlebars";
+import headerTemplate from "../partials/templates/header.hbs"
 
-VanillaTilt.init(document.querySelectorAll(".header-btn"));
+export class Header {
+  constructor(targetSelector) {
+    this.refs = this.getRefs(targetSelector);
+    this.addHelperToHandlebar();
+  }
 
-const refs = {
-  navEl: document.querySelector('.header-navigation_list'),
-  headerTarget: document.querySelector('#header'),
-};
+  drawView(model) {
+    this.refs.target.innerHTML = headerTemplate({
+      authenticate: model.authenticate,
+      context: model.context,
+    })
+  }
 
-refs.headerTarget.innerHTML = headerTemplate({ 
-  isAuth: true,
-  
-})
-  
-  
-// Handlebars.registerHelper("if", function(conditional, options) {
-//   if (conditional) {
-//     return options.fn(this);
-//   } else {
-//     return options.inverse(this);
-//   }
-// });
+  getRefs(targetSelector) {
+    return {
+      target: document.querySelector(targetSelector),
+    }
+  }
 
+  addHelperToHandlebar() {
 
+  }
+}
 
-
-// export function showAuthBlock() {
-//     refs.navEl.innerHTML = '';
-//     const markup = `<li><button type="button" class="header-btn" data-login-open>LOGIN</button></li>
-//         <li><button type="button" class="header-btn" data-registration>REGISTRATION</button></li>`;
-//     refs.navEl.insertAdjacentHTML('beforeend', markup);
-//     VanillaTilt.init(document.querySelectorAll(".header-btn"));
-// };
-
-// export function showNavBlock() {
-//     refs.navEl.innerHTML = '';
-//     const markup = `<li><a href="/" class="link header__link active__link">HOME</a></li>
-// <li><a href="/li" class="link header__link">MY LIBRARY</a></li>
-// <li><button type="button" class="header-btn">LOG OUT</button></li>`;
-//     refs.navEl.insertAdjacentHTML('beforeend', markup);
-//     VanillaTilt.init(document.querySelectorAll(".header-btn"));
-// };
-
+// Написати новий хелпер
+// Написати нову умовну конструкцію для двох блоків
+// Написати нову умовну конструкцію для класу .current для кнопки .nav-button
