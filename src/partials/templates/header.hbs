@@ -14,32 +14,50 @@
         <li><button class="nav-button">My Library</button></li>
       </ul>
     </nav>
-    <button type="button" class="auth-button" id="sign-out-button">Sign Out</button>
-
-  {{else}}
-
-    <button type="button" class="auth-button" id="sign-in-button">Sign In</button>
-
+    <button type="button" class="auth-button" 
+    {{!-- id="sign-out-button" --}}
+    id="sign-out"
+    >Sign Out</button>
   {{/if}}
 
+  {{#unless authenticate}}
+    <button type="button" class="auth-button" 
+    {{!-- id="sign-in-button" --}}
+    id="sign-in"
+    >Sign In</button>
+  {{/unless}}
+  
+
 </div>
 
-<div class="search-container">
-  <label class="search">
-    <input type="text" id="search-input" class="search__input" >
+{{!-- {{#if (#ifequal context "library")}} --}}
+
+{{!-- {{#ifequal context "library"}} --}}
+
+{{#if (ifequal context "library")}}
+
+  <div class="library-filter">
+    <ul class="list library-filter__list">
+      <li>
+        <button id="header-watched" class="action-button ">Watched</button>
+      </li>
+      <li>
+        <button id="header-queue" class="action-button">Queue</button>
+      </li>
+    </ul>
+  </div>
+{{!-- {{/ifequal}} --}}
+{{else}}
+
+
+{{!-- {{#ifequal context "home"}} --}}
+  <div class="search-container">
+    <input type="text" id="search-input" class="search__input" required="">
+    <label class="search__label">Movie search</label>
     <svg class="search__icon">
-      <use href="../src/image/header/symbol-defs.svg#icon-search"></use>
+      <use href="/src/image/header/symbol-defs.svg#icon-search"></use>
     </svg>
-  </label>
-</div>
+  </div>
+{{/if}}
 
-<div class="library-filter">
-  <ul class="list library-filter__list">
-    <li>
-      <button class="action-button">Watched</button>
-    </li>
-    <li>
-      <button class="action-button">Queue</button>
-    </li>
-  </ul>
-</div>
+{{!-- {{/ifequal}} --}}

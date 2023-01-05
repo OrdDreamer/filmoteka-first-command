@@ -3,13 +3,15 @@ import { getFilmItemElement } from "./js/film-item";
 import { anchors, scrollpos } from './js/anchor';
 import { Header } from './js/header';
 
+import * as Handlebars from 'handlebars';
+
 import { getAuth } from 'firebase/auth';
 import { initFirebase } from './js/firebase';
 import { userSignIn, userSignOut } from './js/auth';
 
 import './js/team';
 import './js/modal_team.js';
-
+// import './js/search';
 
 
 
@@ -30,12 +32,16 @@ class App {
 
   initComponents() {
     this.header = new Header("#header");
+    this.header.addListenersOnSignOut(userSignOut);
+    this.header.addListenersOnSignIn(userSignIn);
+    this.header.addListenersOnSearchInput();
+    this.header.addListenersHeaderWatched();
+    this.header.addListenersHeaderQueue();
   }
 
   draw() {
     // TODO Remove start
-    document.querySelector("#log-in").addEventListener("click", userSignIn);
-    document.querySelector("#log-out").addEventListener("click", userSignOut);
+    
     console.log("Draw");
     console.log(this.user ? "Authenticated user" : "Not authenticated user");
     // TODO Remove end
@@ -46,11 +52,15 @@ class App {
   drawHeader() {
     this.header.drawView({
       authenticate: Boolean(this.user),
-      context: "home" // "library"
+      // context: "library"
+      context:  "home"
     });
   }
 
   initHandlebars() {
+    Handlebars.registerHelper('ifequal', function (firstValue, secondValue) {
+      return firstValue === secondValue;
+    });
 
   }
 }
