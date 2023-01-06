@@ -30,7 +30,7 @@ export class Header {
 
   addListeners() {
     const singOut = document.querySelector('#sign-out');
-    
+
     if (singOut) {
       singOut.addEventListener('click', this.onSignOutClick);
     }
@@ -38,7 +38,7 @@ export class Header {
     if (singIn) {
       singIn.addEventListener('click', this.onSignInClick);
     }
-    
+
     const searchInput = document.querySelector('#search-input');
     if (searchInput) {
       searchInput.addEventListener('input', this.onSearchInput);
@@ -57,7 +57,7 @@ export class Header {
 
   removeListeners() {
     const singOut = document.querySelector('#sign-out');
-    
+
     if (singOut) {
       singOut.removeEventListener('click', this.onSignOutClick);
     }
@@ -85,17 +85,17 @@ export class Header {
 
 
 
-  onSearchInput = () => {
+  onSearchInput = (event) => {
     console.log("searchInput");
-    
+
     for (const callback of this.searchInputCallbacks) {
-      callback();
+      callback(event.currentTarget.value);
     }
   }
 
   onSignInClick = () => {
     console.log("on sign in");
-    
+
     for (const callback of this.signInCallbacks) {
       callback();
     }
@@ -103,7 +103,7 @@ export class Header {
 
   onSignOutClick = () => {
     console.log("on sign out");
-    
+
     for (const callback of this.signOutCallbacks) {
       callback();
     }
@@ -111,7 +111,7 @@ export class Header {
 
   onHeaderWatched = () => {
     console.log("Watched");
-    
+
     for (const callback of this.headerWatchedCallbacks) {
       callback();
     }
@@ -119,13 +119,11 @@ export class Header {
 
   onHeaderQueue = () => {
     console.log("Queue");
-    
+
     for (const callback of this.headerQueueCallbacks) {
       callback();
     }
   }
-
-  
 
 
   addListenersOnSearchInput(callback) {
