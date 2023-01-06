@@ -11,7 +11,8 @@ import { userSignIn, userSignOut } from './js/auth';
 
 import './js/team';
 import './js/modal_team.js';
-// import './js/search';
+import { Notiflix } from './js/Notiflix';
+import { Preloader } from './js/Preloader';
 
 
 
@@ -19,29 +20,46 @@ import './js/modal_team.js';
 class App {
 
   constructor() {
-    this.initHandlebars();
+    this.initHandlebarsHelpers();
     this.initComponents();
     initFirebase();
     this.auth = getAuth();
 
+    this.preloader.showLoader();
     this.auth.onAuthStateChanged((res) => {
+      this.preloader.hideLoader();
       this.user = res;
+      this.showAuthNotification();
       this.draw();
     });
   }
 
   initComponents() {
+    this.initNotification();
+    this.initPreloader();
+    this.initHeader();
+  }
+
+  initNotification() {
+    this.notiflix = new Notiflix();
+  }
+
+  initPreloader() {
+    this.preloader = new Preloader();
+  }
+
+  initHeader() {
     this.header = new Header("#header");
     this.header.addListenersOnSignOut(userSignOut);
     this.header.addListenersOnSignIn(userSignIn);
-    this.header.addListenersOnSearchInput();
-    this.header.addListenersHeaderWatched();
-    this.header.addListenersHeaderQueue();
+    this.header.addListenersOnSearchInput(); // TODO
+    this.header.addListenersHeaderWatched(); // TODO
+    this.header.addListenersHeaderQueue(); // TODO
   }
 
   draw() {
     // TODO Remove start
-    
+
     console.log("Draw");
     console.log(this.user ? "Authenticated user" : "Not authenticated user");
     // TODO Remove end
@@ -57,11 +75,19 @@ class App {
     });
   }
 
-  initHandlebars() {
+  showAuthNotification() {
+    console.log(this.user);
+    if (this.user) {
+      this.notiflix.showInfo(`You are authenticated as ${this.user.displayName}`)
+    } else {
+      this.notiflix.showInfo("Authenticate to access all features");
+    }
+  }
+
+  initHandlebarsHelpers() {
     Handlebars.registerHelper('ifequal', function (firstValue, secondValue) {
       return firstValue === secondValue;
     });
-
   }
 }
 
