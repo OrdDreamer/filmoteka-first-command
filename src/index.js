@@ -13,6 +13,8 @@ import './js/team';
 import './js/modal_team.js';
 import { Notiflix } from './js/Notiflix';
 import { Preloader } from './js/Preloader';
+import itemContainer from './js/itemContainer';
+
 
 
 

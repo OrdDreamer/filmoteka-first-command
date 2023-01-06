@@ -1,4 +1,5 @@
 import axios from 'axios';
+import getInfoFromFns from './itemContainer'
 
 axios.defaults.baseURL = `https://api.themoviedb.org/3/`;
 
