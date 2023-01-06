@@ -10,9 +10,10 @@ export class Header {
     this.searchInputCallbacks = new Set();
     this.headerWatchedCallbacks = new Set();
     this.headerQueueCallbacks = new Set();
-
+    this.headerHomeCallbacks = new Set();
+    this.headerLibraryCallbacks = new Set();
   }
-
+  
   drawView(model) {
     this.removeListeners();
     this.refs.target.innerHTML = headerTemplate({
@@ -53,6 +54,16 @@ export class Header {
     if (headerQueue) {
       headerQueue.addEventListener('click', this.onHeaderQueue);
     }
+
+    const headerHome = document.querySelector('#header-home');
+    if (headerHome) {
+      headerHome.addEventListener('click', this.onHeaderHome);
+    }
+
+    const headerLibrary = document.querySelector('#header-library');
+    if (headerLibrary) {
+      headerLibrary.addEventListener('click', this.onHeaderLibrary);
+    }
   }
 
   removeListeners() {
@@ -81,6 +92,16 @@ export class Header {
     if (headerQueue) {
       headerQueue.removeEventListener('click', this.onHeaderQueue);
     }
+
+    const headerHome = document.querySelector('#header-home');
+    if (headerHome) {
+      headerHome.removeEventListener('click', this.onHeaderHome);
+    }
+
+    const headerLibrary = document.querySelector('#header-library');
+    if (headerLibrary) {
+      headerLibrary.removeEventListener('click', this.onHeaderLibrary);
+    }
   }
 
 
@@ -91,6 +112,7 @@ export class Header {
     for (const callback of this.searchInputCallbacks) {
       callback(event.currentTarget.value);
     }
+    console.log(event.currentTarget.value)
   }
 
   onSignInClick = () => {
@@ -107,6 +129,16 @@ export class Header {
     for (const callback of this.signOutCallbacks) {
       callback();
     }
+
+    const headerLibrary = document.querySelector('#header-library');
+    const headerHome = document.querySelector('#header-home');
+    
+    
+
+    if (headerLibrary.classList === 'current') {
+      headerLibrary.classList.toggle('current');
+      headerHome.classList.toggle('current');
+    }
   }
 
   onHeaderWatched = () => {
@@ -114,6 +146,12 @@ export class Header {
 
     for (const callback of this.headerWatchedCallbacks) {
       callback();
+    }
+    const headerWatched = document.querySelector('#header-watched');
+    const headerQueue = document.querySelector('#header-queue');
+    if (headerWatched.classList !== 'active') {
+      headerWatched.classList.toggle('active');
+      headerQueue.classList.toggle('active');
     }
   }
 
@@ -123,8 +161,47 @@ export class Header {
     for (const callback of this.headerQueueCallbacks) {
       callback();
     }
+    const headerWatched = document.querySelector('#header-watched');
+    const headerQueue = document.querySelector('#header-queue');
+    if (headerQueue.classList !== 'active') {
+      headerWatched.classList.toggle('active');
+      headerQueue.classList.toggle('active');
+    }
   }
 
+  onHeaderHome = () => {
+    console.log("Home");
+
+    for (const callback of this.headerHomeCallbacks) {
+      callback();
+    }
+    const headerContainer = document.querySelector('#header');
+    const headerHome = document.querySelector('#header-home');
+    const headerLibrary = document.querySelector('#header-library');
+    headerContainer.classList.toggle('library');
+    this.drawView({ authenticate: true, context: "home" })
+        if (headerLibrary.classList === 'current') {
+      headerLibrary.classList.toggle('current');
+      headerHome.classList.toggle('current');
+      
+    }
+  }
+
+  onHeaderLibrary = () => {
+    console.log("Library");
+
+    for (const callback of this.headerHomeCallbacks) {
+      callback();
+    }
+    const headerContainer = document.querySelector('#header');
+    headerContainer.classList.toggle('library');
+    
+    this.drawView({ authenticate: true, context: "library" })
+    const headerLibrary = document.querySelector('#header-library');
+    headerLibrary.classList.toggle('current');
+    const headerHome = document.querySelector('#header-home');
+    headerHome.classList.toggle('current');
+  }
 
   addListenersOnSearchInput(callback) {
     if (typeof callback === "function") {
@@ -155,8 +232,22 @@ export class Header {
       this.headerQueueCallbacks.add(callback);
     }
   }
+
+  addListenersHeaderHome(callback) {
+    if (typeof callback === "function") {
+      this.headerHomeCallbacks.add(callback);
+    }
+  }
+
+  addListenersHeaderLibrary(callback) {
+    if (typeof callback === "function") {
+      this.headerLibraryCallbacks.add(callback);
+    }
+  }
 }
 
 // Написати новий хелпер
 // Написати нову умовну конструкцію для двох блоків
 // Написати нову умовну конструкцію для класу .current для кнопки .nav-button
+
+

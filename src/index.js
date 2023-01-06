@@ -55,6 +55,8 @@ class App {
     this.header.addListenersOnSearchInput(); // TODO
     this.header.addListenersHeaderWatched(); // TODO
     this.header.addListenersHeaderQueue(); // TODO
+    this.header.addListenersHeaderHome();
+    this.header.addListenersHeaderLibrary();
   }
 
   draw() {
@@ -92,3 +94,4 @@ class App {
 }
 
 new App();
+

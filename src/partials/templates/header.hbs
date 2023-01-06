@@ -1,7 +1,7 @@
 <div class="header__nav-container">
   <a href="/src/index.html" class="link logo">
     <svg class="logo__icon" width="24" height="24">
-      <use href="./image/header/symbol-defs.svg#icon-film"></use>
+      <use href="/src/image/header/symbol-defs.svg#icon-film"></use>
     </svg>
     <span class="logo__text">Filmoteka</span>
   </a>
@@ -10,8 +10,8 @@
 
     <nav class="header__navigation">
       <ul class="list header__navigation-list">
-        <li><button class="nav-button current">Home</button></li>
-        <li><button class="nav-button">My Library</button></li>
+        <li><button id="header-home"class="nav-button current">Home</button></li>
+        <li><button id="header-library"class="nav-button">My Library</button></li>
       </ul>
     </nav>
     <button type="button" class="auth-button" 
@@ -30,23 +30,19 @@
 
 </div>
 
-{{!-- {{#if (#ifequal context "library")}} --}}
-
-{{!-- {{#ifequal context "library"}} --}}
-
 {{#if (ifequal context "library")}}
 
   <div class="library-filter">
     <ul class="list library-filter__list">
       <li>
-        <button id="header-watched" class="action-button ">Watched</button>
+        <button id="header-watched" class="action-button active">Watched</button>
       </li>
       <li>
         <button id="header-queue" class="action-button">Queue</button>
       </li>
     </ul>
   </div>
-{{!-- {{/ifequal}} --}}
+
 {{else}}
 
 
@@ -59,5 +55,3 @@
     </svg>
   </div>
 {{/if}}
-
-{{!-- {{/ifequal}} --}}
