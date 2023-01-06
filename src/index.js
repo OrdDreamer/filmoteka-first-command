@@ -53,8 +53,8 @@ class App {
     this.header.addListenersOnSignOut(userSignOut);
     this.header.addListenersOnSignIn(userSignIn);
     this.header.addListenersOnSearchInput(); // TODO
-    this.header.addListenersHeaderWatched(); // TODO
-    this.header.addListenersHeaderQueue(); // TODO
+    this.header.addListenersOnChangePage(); // TODO
+    this.header.addListenersOnChangeLibrarySection(); // TODO
   }
 
   draw() {
@@ -70,8 +70,10 @@ class App {
   drawHeader() {
     this.header.drawView({
       authenticate: Boolean(this.user),
-      // context: "library"
-      context:  "home"
+      page: "library",
+      // context:  "home"
+      librarySection: "watched",
+      // librarySection: "queue",
     });
   }
 
@@ -92,3 +94,4 @@ class App {
 }
 
 new App();
+

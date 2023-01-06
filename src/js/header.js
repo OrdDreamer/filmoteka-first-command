@@ -1,24 +1,25 @@
-import headerTemplate from "../partials/templates/header.hbs"
-
-
+import headerTemplate from "../partials/templates/header.hbs";
 
 export class Header {
   constructor(targetSelector) {
     this.refs = this.getRefs(targetSelector);
-    this.signOutCallbacks = new Set();
-    this.signInCallbacks = new Set();
-    this.searchInputCallbacks = new Set();
-    this.headerWatchedCallbacks = new Set();
-    this.headerQueueCallbacks = new Set();
+    this.initCallbacksStore();
+  }
 
+  initCallbacksStore() {
+    this.callbacksStore = {
+      signIn: new Set(),
+      signOut: new Set(),
+      changePage: new Set(),
+      search: new Set(),
+      changeLibrarySection: new Set(),
+    }
   }
 
   drawView(model) {
     this.removeListeners();
-    this.refs.target.innerHTML = headerTemplate({
-      authenticate: model.authenticate,
-      context: model.context,
-    });
+    this.refs.target.innerHTML = headerTemplate(model);
+    this.updateBackground(model.page);
     this.addListeners();
   }
 
@@ -30,10 +31,10 @@ export class Header {
 
   addListeners() {
     const singOut = document.querySelector('#sign-out');
-
     if (singOut) {
       singOut.addEventListener('click', this.onSignOutClick);
     }
+
     const singIn = document.querySelector('#sign-in');
     if (singIn) {
       singIn.addEventListener('click', this.onSignInClick);
@@ -53,11 +54,20 @@ export class Header {
     if (headerQueue) {
       headerQueue.addEventListener('click', this.onHeaderQueue);
     }
+
+    const headerHome = document.querySelector('#header-home');
+    if (headerHome) {
+      headerHome.addEventListener('click', this.onShowHomePage);
+    }
+
+    const headerLibrary = document.querySelector('#header-library');
+    if (headerLibrary) {
+      headerLibrary.addEventListener('click', this.onShowLibraryPage);
+    }
   }
 
   removeListeners() {
     const singOut = document.querySelector('#sign-out');
-
     if (singOut) {
       singOut.removeEventListener('click', this.onSignOutClick);
     }
@@ -81,82 +91,100 @@ export class Header {
     if (headerQueue) {
       headerQueue.removeEventListener('click', this.onHeaderQueue);
     }
+
+    const headerHome = document.querySelector('#header-home');
+    if (headerHome) {
+      headerHome.removeEventListener('click', this.onShowHomePage);
+    }
+
+    const headerLibrary = document.querySelector('#header-library');
+    if (headerLibrary) {
+      headerLibrary.removeEventListener('click', this.onShowLibraryPage);
+    }
   }
 
-
+  updateBackground(page) {
+    const headerContainer = document.querySelector("#header");
+    if (!headerContainer) {
+      return;
+    }
+    if (page === "library") {
+      headerContainer.classList.add('library');
+    } else {
+      headerContainer.classList.remove('library');
+    }
+  }
 
   onSearchInput = (event) => {
-    console.log("searchInput");
-
-    for (const callback of this.searchInputCallbacks) {
+    for (const callback of this.callbacksStore.search) {
       callback(event.currentTarget.value);
     }
   }
 
   onSignInClick = () => {
-    console.log("on sign in");
-
-    for (const callback of this.signInCallbacks) {
+    for (const callback of this.callbacksStore.signIn) {
       callback();
     }
   }
 
   onSignOutClick = () => {
-    console.log("on sign out");
-
-    for (const callback of this.signOutCallbacks) {
+    for (const callback of this.callbacksStore.signOut) {
       callback();
     }
   }
 
   onHeaderWatched = () => {
-    console.log("Watched");
-
-    for (const callback of this.headerWatchedCallbacks) {
-      callback();
+    for (const callback of this.callbacksStore.changeLibrarySection) {
+      callback("watched");
     }
   }
 
   onHeaderQueue = () => {
-    console.log("Queue");
-
-    for (const callback of this.headerQueueCallbacks) {
-      callback();
+    for (const callback of this.callbacksStore.changeLibrarySection) {
+      callback("queue");
     }
   }
 
+  onShowHomePage = () => {
+    for (const callback of this.callbacksStore.changePage) {
+      callback("home");
+    }
+  }
 
-  addListenersOnSearchInput(callback) {
-    if (typeof callback === "function") {
-      this.searchInputCallbacks.add(callback);
+  onShowLibraryPage = () => {
+    for (const callback of this.callbacksStore.changePage) {
+      callback("library");
     }
   }
 
   addListenersOnSignOut(callback) {
     if (typeof callback === "function") {
-      this.signOutCallbacks.add(callback);
+      this.callbacksStore.signOut.add(callback);
     }
   }
 
   addListenersOnSignIn(callback) {
     if (typeof callback === "function") {
-      this.signInCallbacks.add(callback);
+      this.callbacksStore.signIn.add(callback);
     }
   }
 
-  addListenersHeaderWatched(callback) {
+  addListenersOnChangePage(callback) {
     if (typeof callback === "function") {
-      this.headerWatchedCallbacks.add(callback);
+      this.callbacksStore.changePage.add(callback);
     }
   }
 
-  addListenersHeaderQueue(callback) {
+  addListenersOnSearchInput(callback) {
     if (typeof callback === "function") {
-      this.headerQueueCallbacks.add(callback);
+      this.callbacksStore.search.add(callback);
     }
   }
+
+  addListenersOnChangeLibrarySection(callback) {
+    if (typeof callback === "function") {
+      this.callbacksStore.changeLibrarySection.add(callback);
+    }
+  }
+
 }
-
-// Написати новий хелпер
-// Написати нову умовну конструкцію для двох блоків
-// Написати нову умовну конструкцію для класу .current для кнопки .nav-button
