@@ -10,43 +10,65 @@
 
     <nav class="header__navigation">
       <ul class="list header__navigation-list">
-        <li><button id="header-home"class="nav-button current">Home</button></li>
-        <li><button id="header-library"class="nav-button">My Library</button></li>
+        <li>
+          <button
+            id="header-home"
+            class="nav-button {{#if (ifequal page 'home')}}current{{/if}}"
+          >
+            Home
+          </button>
+        </li>
+        <li>
+          <button
+            id="header-library"
+            class="nav-button {{#if (ifequal page 'library')}}current{{/if}}"
+          >
+            My Library
+          </button>
+        </li>
       </ul>
     </nav>
-    <button type="button" class="auth-button" 
+    <button type="button" class="auth-button"
     {{!-- id="sign-out-button" --}}
     id="sign-out"
     >Sign Out</button>
   {{/if}}
 
   {{#unless authenticate}}
-    <button type="button" class="auth-button" 
+    <button type="button" class="auth-button"
     {{!-- id="sign-in-button" --}}
     id="sign-in"
     >Sign In</button>
   {{/unless}}
-  
+
 
 </div>
 
-{{#if (ifequal context "library")}}
+{{#if (ifequal page "library")}}
 
   <div class="library-filter">
     <ul class="list library-filter__list">
       <li>
-        <button id="header-watched" class="action-button active">Watched</button>
+        <button
+          id="header-watched"
+          class="action-button {{#if (ifequal librarySection 'watched')}}active{{/if}}"
+        >
+          Watched
+        </button>
       </li>
       <li>
-        <button id="header-queue" class="action-button">Queue</button>
+        <button
+          id="header-queue"
+          class="action-button {{#if (ifequal librarySection 'queue')}}active{{/if}}"
+        >
+          Queue
+        </button>
       </li>
     </ul>
   </div>
 
 {{else}}
 
-
-{{!-- {{#ifequal context "home"}} --}}
   <div class="search-container">
     <input type="text" id="search-input" class="search__input" required="">
     <label class="search__label">Movie search</label>
