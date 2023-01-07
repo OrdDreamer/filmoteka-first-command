@@ -22,8 +22,8 @@ class App {
     this.initComponents();
     initFirebase();
     this.state = {
-      page: 'home',
-      librarySection: 'watched',
+      page: "home",
+      librarySection: "watched",
     };
     this.auth = getAuth();
 
@@ -31,6 +31,7 @@ class App {
     this.auth.onAuthStateChanged((res) => {
       this.preloader.hideLoader();
       this.user = res;
+      this.state.page = "home"
       this.showAuthNotification();
       this.draw();
     });
