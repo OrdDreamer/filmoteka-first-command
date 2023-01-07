@@ -1,6 +1,9 @@
 import { refs } from '../js/refs-team';
 
-const {backdrop, closeModalBtn } = refs
+const { backdrop, closeModalBtn } = refs
+
+// const closeModalBtn = document.querySelector('[data-modal="close"]'),
+//   backdrop = document.querySelector('[data-modal="backdrop"]');
 
 let flag = false;
 
@@ -16,8 +19,7 @@ function openModal(backdrop, btnClose) {
   backdrop.classList.remove('visually-hidden');
   btnClose.addEventListener('click', closeModalWindow);
   backdrop.addEventListener('click', closeToBackdrop);
-  document.querySelector('.modal__btns-list').classList.remove('visually-hidden') 
-  scroll();
+
   if (flag === false) {
     window.addEventListener('keydown', onEscKeyPress);
     flag = true;

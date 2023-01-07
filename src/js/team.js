@@ -8,11 +8,15 @@ import sprite from '../data-team/sprite.svg';
 
 const { contactsLink, modal, backdrop } = refs;
 
+// const backdrop = document.querySelector('[data-modal="backdrop"]'),
+//  modal = document.querySelector('.modal__content'),
+//  contactsLink = document.querySelector('.js-students-contacts');
+
+
 contactsLink.addEventListener('click', onContactsClick);
 
 function onContactsClick() {
   openModalWindow(backdrop);
-  document.querySelector('.modal__btns-list').classList.add('visually-hidden') 
   const list = contactsArr.team;
   modal.innerHTML = contactsTmpl({ list, sprite });
 }
