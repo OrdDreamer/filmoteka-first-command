@@ -4,10 +4,10 @@
 
   <div class='tabs__nav'>
     {{#if videoSrc}}
-    <button id='tab-info' class='tabs__btn {{#if (ifequal tab 'info')}}current-tab{{/if}}'>
+    <button id='tab-info' class='tabs__btn   {{#if (ifequal tab 'info')}}current-tab gradient-button{{/if}}'>
       Info
     </button>
-    <button id='tab-video' class='tabs__btn {{#if (ifequal tab 'video')}}current-tab{{/if}}'>
+    <button id='tab-video' class='tabs__btn {{#if (ifequal tab 'video')}}current-tab gradient-button{{/if}}'>
       Trailer
     </button>
      {{/if}}
@@ -17,22 +17,66 @@
   <div class='tabs__content'>
     {{#if (ifequal tab 'info')}}
       <div class data-index='0'>
-        <img src='' alt='' width='100px' height='150px' />
+   <div class='side-container'>
+      <div class='left-side'>
+        <img class = "film-img" src='{{poster}}' alt='{{title}}' />
+      </div>
+      <div class='right-side'>
+        <h2 class='film-title'>{{title}}</h2>
+        <div class='film-info'>
+          <div class='votes'>
+            <p class='film-text'>Vote / Votes</p>
+            <p class='film-votes film-text'>
+              <span class='film-rating film-text'>{{vote}}
+                
+              </span>&nbsp;/<span
+                class='rating'
+              >{{votes}}</span>
+            </p>
+          </div>
+          <div class='popularity'>
+            <p class='film-text'>Popularity</p>
+            <p class='film-text-color film-text'>{{popularity}}</p>
+          </div>
+          <div class='original-title'>
+            <p class='film-text'>Original Title</p>
+            <p class='film-text-color film-text'>{{originalTitle}}</p>
+          </div>
+          <div class='genre'>
+            <p class='film-text'>Genre</p>
+            <p class='film-text-color film-text'>{{genre}}</p>
+          </div>
+        </div>
+        <p class='about-film'>About</p>
+        <p class='about-film-info'>
+          {{about}}
+        </p>
+        <div class='btn-container'>
+          <button class='btn-watched gradient-button'>add to Watched</button>
+          <button class='btn-queue glow-button'>add to queue</button>
+        </div>
+      </div>   
+  </div>
+
+        {{!-- <img src='' alt='' width='100px' height='150px' />
         <h2>{{title}}</h2>
-        <p>{{about}}</p>
+        <p>{{about}}</p> --}}
       </div>
     {{else}}
-      <div data-index='1'>
-        <p>video</p>
-        {{!-- <div class='iframe'>
+  <div data-index='1'>
+    
+  </div>
+        <div class='iframe'>
           <iframe class='player' id='player-1' src='{{videoSrc}}' width='560' height='315'>
           </iframe>
-        </div> --}}
-      </div>
+        </div>
+      
     {{/if}}
   </div>
 
-  <div class = 'lightbox__close-btn'>&#215</div>
+  <div class = 'lightbox__close-btn modal__close-btn'>&#215
+    
+  </div>
 
   <button id = 'arrow-next' data-next='' class='lightbox__arrow lightbox__arrow-next'>»</button>
 </div>
