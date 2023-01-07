@@ -19,11 +19,20 @@ class App {
   constructor() {
     this.initHandlebarsHelpers();
     this.initComponents();
+    this.initAPI();
     initFirebase();
+
     this.state = {
       page: "home",
       librarySection: "watched",
+      filtersConfig: {
+        type: "trend", // "search", "watched", "queue"
+        searchQuery: "",
+        pageNumber: 1,
+      },
+      processCode: null,
     };
+
     this.auth = getAuth();
 
     this.preloader.showLoader();
@@ -34,6 +43,10 @@ class App {
       this.showAuthNotification();
       this.draw();
     });
+  }
+
+  initAPI() {
+    this.apiService = new FilmotekaAPI();
   }
 
   initComponents() {
@@ -54,7 +67,7 @@ class App {
     this.header = new Header('#header');
     this.header.addListenersOnSignOut(userSignOut);
     this.header.addListenersOnSignIn(userSignIn);
-    this.header.addListenersOnSearchInput(); // TODO
+    this.header.addListenersOnSearchInput(this.handleSearchInput); // TODO
     this.header.addListenersOnChangePage(this.handleChangePage); // TODO
     this.header.addListenersOnChangeLibrarySection(this.handleChangeLibrarySection); // TODO
   }
@@ -141,6 +154,44 @@ class App {
   showQueueLibrarySection() {
     this.state.librarySection = "queue";
     this.draw();
+  }
+
+  handleSearchInput = (query) => {
+    const code = this.getRandomCode();
+    this.state.filtersConfig = {
+      searchQuery: query || "",
+      page: 1,
+    }
+
+    const callback = (data) => {
+      if (!this.checkCode(code)) {
+        return;
+      }
+      this.showItems(data);
+    };
+
+    if (!query) {
+      this.state.filtersConfig.type = "trend";
+      this.apiService.getMostPopular().then(callback); // TODO timeWeek
+      return;
+    }
+
+    this.state.filtersConfig.type = "search";
+    this.apiService.searchMovie(query).then(callback);
+
+  }
+
+  showItems(data) {
+  }
+
+  getRandomCode() {
+    const code = Math.floor(1 + Math.random() * 1000);
+    this.state.processCode = code;
+    return code;
+  }
+
+  checkCode(code) {
+    return this.state.processCode === code;
   }
 }
 
