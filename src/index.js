@@ -1,5 +1,4 @@
 import FilmotekaAPI from './js/FilmotekaAPI';
-import { getFilmItemElement } from './js/film-item';
 import { anchors, scrollpos } from './js/anchor';
 import { Header } from './js/header';
 
