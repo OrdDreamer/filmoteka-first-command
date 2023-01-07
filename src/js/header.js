@@ -1,4 +1,5 @@
 import headerTemplate from "../partials/templates/header.hbs";
+import sprite from '../images/symbol-defs.svg';
 
 export class Header {
   constructor(targetSelector) {
@@ -18,7 +19,7 @@ export class Header {
 
   drawView(model) {
     this.removeListeners();
-    this.refs.target.innerHTML = headerTemplate(model);
+    this.refs.target.innerHTML = headerTemplate({...model, sprite});
     this.updateBackground(model.page);
     this.addListeners();
   }
