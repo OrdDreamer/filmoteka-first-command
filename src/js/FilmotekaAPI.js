@@ -28,6 +28,7 @@ export default class FilmotekaAPI {
       this.totalPages = response.data.total_pages;
       this.totalResults = response.data.total_results;
       const array = {
+        arrId: response.data.results.map(result => result.id),
         page: response.data.page,
         totalPages: response.data.total_pages,
         totalResults: response.data.total_results,
@@ -44,36 +45,17 @@ export default class FilmotekaAPI {
     try {
       this.query = query;
       const response = await axios.get(
-        `search/movie?api_key=${this._apiKey}&query=${this.query}&page=${this.page}`
+        `search/movie?api_key=${this._apiKey}&query=${this.query}&page=${this.page}&include_adult=false`
       );
       this.totalPages = response.data.total_pages;
       this.totalResults = response.data.total_results;
       console.log(response);
       const array = {
+        arrId: response.data.results.map(result => result.id),
         finded: response.data.results,
         page: response.data.page,
         totalPages: response.data.total_pages,
         totalResults: response.data.total_results,
-      };
-      return array;
-    } catch (error) {
-      throw new Error(error.message);
-    }
-  }
-
-  // Отримання повної інформації кінофільму за допомогою ID
-  async getInfoCardGallery(movie_id) {
-    try {
-      this.movie_id = movie_id;
-      const response = await axios.get(
-        `movie/${this.movie_id}?api_key=${this._apiKey}&language=${this.language}`
-      );
-      const array = {
-        title: response.data.title,
-        genre: response.data.genres.map(genre => genre.name).join(','),
-        release: response.data.release_date,
-        vote: response.data.vote_average,
-        poster: this.getPoster(),
       };
       return array;
     } catch (error) {
@@ -90,7 +72,8 @@ export default class FilmotekaAPI {
       const poster = this.getPoster(movie_id, posterWidth);
       const array = {
         title: response.data.title,
-        genre: response.data.genres.map(genre => genre.name).join(','),
+        genre: response.data.genres.map(genre => genre.name),
+        release: response.data.release_date,
         vote: response.data.vote_average,
         poster: poster,
       };
@@ -100,16 +83,18 @@ export default class FilmotekaAPI {
     }
   }
 
-  // Отримання повної інформації кінофільму за допомогою ID  та ширини постеру для адаптиву та ретіни
+  // Отримання повної інформації кінофільму за допомогою ID  та ширини постеру для адаптиву та ретіни у модалку
   async getInfoCardModal(movie_id, posterWidth) {
     try {
-      this.movie_id = movie_id;
+      if (movie_id) {
+        this.movie_id = movie_id;
+      }
       const response = await axios.get(
         `movie/${this.movie_id}?api_key=${this._apiKey}&language=${this.language}`
       );
       const array = {
         title: response.data.title,
-        genre: response.data.genres.map(genre => genre.name).join(','),
+        genre: response.data.genres.map(genre => genre.name).join(', '),
         release: response.data.release_date,
         vote: response.data.vote_average,
         votes: response.data.vote_count,
@@ -127,12 +112,14 @@ export default class FilmotekaAPI {
   // Отримання посилання трейлера з ютуб
   async getVideo(movie_id) {
     try {
+      if (movie_id) {
+        this.movie_id = movie_id;
+      }
       const response = await axios.get(
         `movie/${this.movie_id}/videos?api_key=${this._apiKey}&language=${this.language}`
       );
-
       const videoID = response.data.results.map(result => result.key).slice(0, 1);
-      return `https://www.youtube.com/watch?v=${videoID}`;
+      return `https://www.themoviedb.org/video/play?key=${videoID}`;
     } catch (error) {
       throw new Error(error.message);
     }
@@ -158,18 +145,20 @@ export default class FilmotekaAPI {
       throw new Error(error.message);
     }
   }
-// повертає список жанрів
-async getGeners() {
-  try{
-    const response = await axios.get(`genre/movie/list?api_key=${this._apiKey}&language=${this.language}`);
-    return response.data;
-  } catch (error) {
-    throw new Error(error.message);
+
+  // повертає список жанрів
+  async getGeners() {
+    try {
+      const response = await axios.get(
+        `genre/movie/list?api_key=${this._apiKey}&language=${this.language}`
+      );
+      return response.data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
-}
 
   // додає сторінку
-
   incrementPage() {
     this.page += 1;
   }
@@ -194,10 +183,10 @@ async getGeners() {
   //встановлює потрібну сторінку
   setCurrentPage(setPage) {
     if (Number(setPage) > 0) {
-    this.page = Number(setPage);
-    } else 
-    {alert('Page must be > "0" !!!');
-  }
+      this.page = Number(setPage);
+    } else {
+      alert('Page must be > "0" !!!');
+    }
   }
 
   // повертає ID відео
@@ -207,9 +196,9 @@ async getGeners() {
 
   // встановлює потрібний  ID відео
   setCurrentID(newID) {
-    this.movie_id = newID;
+    this.movie_id = Number(newID);
   }
 }
 
-const test = new FilmotekaAPI;
-console.log(test.getGeners())
+
+
