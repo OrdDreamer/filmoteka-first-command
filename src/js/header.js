@@ -1,7 +1,6 @@
 import headerTemplate from "../partials/templates/header.hbs";
 import sprite from '../images/symbol-defs.svg';
 
-console.log(sprite)
 export class Header {
   constructor(targetSelector) {
     this.refs = this.getRefs(targetSelector);
