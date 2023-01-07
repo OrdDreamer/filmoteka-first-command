@@ -1,5 +1,8 @@
 import headerTemplate from "../partials/templates/header.hbs";
 import sprite from '../images/symbol-defs.svg';
+import debounce from "lodash.debounce";
+
+const DEBOUNCE_DELAY = 1000;
 
 export class Header {
   constructor(targetSelector) {
@@ -43,7 +46,7 @@ export class Header {
 
     const searchInput = document.querySelector('#search-input');
     if (searchInput) {
-      searchInput.addEventListener('input', this.onSearchInput);
+      searchInput.addEventListener('input', debounce(this.onSearchInput, DEBOUNCE_DELAY));
     }
 
     const headerWatched = document.querySelector('#header-watched');
