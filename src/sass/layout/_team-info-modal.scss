@@ -295,10 +295,13 @@ $animation-duration: 250ms;
 }
 
 .backdrop {
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        position: absolute;
-        background-color: rgba(83, 83, 83, 0.89);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    background-color: $modal-backdrop;
+    z-index: 100;
+
+    transition: opacity $animation-duration $timing-function;
 }
