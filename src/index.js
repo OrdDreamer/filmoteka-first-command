@@ -178,7 +178,6 @@ class App {
 
     this.state.filtersConfig.type = "search";
     this.apiService.searchMovie(query).then(callback);
-
   }
 
   showItems(data) {

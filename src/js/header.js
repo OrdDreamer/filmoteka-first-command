@@ -120,8 +120,9 @@ export class Header {
   }
 
   onSearchInput = (event) => {
+    console.log(event)
     for (const callback of this.callbacksStore.search) {
-      callback(event.currentTarget.value);
+      callback(event.target.value);
     }
   }
 
