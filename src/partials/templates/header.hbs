@@ -1,14 +1,8 @@
 <div class="header__nav-container">
   <a href="/src/index.html" class="link logo">
-
-    {{!-- <svg class="logo__icon" width="24" height="24">
-      <use href="/src/image/header/symbol-defs.svg#icon-film"></use>
-    </svg> --}}
-    <span class="logo__text">Filmoteka</span>
+   <svg class="logo__icon" width="24" height="24"><use href="{{sprite}}#icon-film"></use></svg><span class="logo__text">Filmoteka</span>
   </a>
-
   {{#if authenticate}}
-
     <nav class="header__navigation">
       <ul class="list header__navigation-list">
         <li>
@@ -74,7 +68,7 @@
     <input type="text" id="search-input" class="search__input" required="">
     <label class="search__label">Movie search</label>
     <svg class="search__icon">
-      <use href="/src/image/header/symbol-defs.svg#icon-search"></use>
+      <use href="{{sprite}}#icon-search"></use>
     </svg>
   </div>
 {{/if}}
