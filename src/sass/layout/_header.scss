@@ -203,11 +203,9 @@
     border-bottom: 2px solid var(--accent-color);
   }
 
-  &:hover+.search__icon,
-  &:focus+.search__icon {
-
+  &:hover ~ .search__icon,
+  &:focus ~ .search__icon {
     stroke: var(--accent-color);
-
   }
 }
 
