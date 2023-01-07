@@ -19,7 +19,7 @@ export class Header {
 
   drawView(model) {
     this.removeListeners();
-    this.refs.target.innerHTML = headerTemplate({model, sprite});
+    this.refs.target.innerHTML = headerTemplate({...model, sprite});
     this.updateBackground(model.page);
     this.addListeners();
   }
