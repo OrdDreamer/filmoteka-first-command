@@ -1,0 +1,15 @@
+<span class='info-text'>
+  {{#if (ifequal type "trend")}}
+    Trending movies:
+  {{else if (ifequal type "search")}}
+    {{#if count}}
+      Approximate number of results: {{count}}
+    {{else}}
+      Nothing was found for your request
+    {{/if}}
+  {{else if (ifequal type "watched")}}
+    Your watched movies ({{count}}):
+  {{else if (ifequal type "queue")}}
+    Your queue movies ({{count}}):
+  {{/if}}
+</span>

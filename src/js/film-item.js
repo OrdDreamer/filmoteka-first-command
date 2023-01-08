@@ -53,8 +53,9 @@
 // }
 import filmItemTemplate from '../partials/templates/film-item.hbs';
 
-export function getFilmItemElement(data) {
+export function getFilmItemElement(data, customClasses = "") {
   return filmItemTemplate({
+    customClasses,
     filmId: data.id,
     // desktopImage1x:
     // desktopImage2x:

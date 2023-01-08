@@ -1,3 +1,17 @@
+.film-item-size {
+  flex-basis: 100%;
+
+  @include media-from-tablet-resolution {
+    flex-basis: calc((100% - 30px) / 2);
+  }
+
+  @include media-from-desktop-resolution {
+    flex-basis: calc((100% - 30px) / 3);
+  }
+}
+
+
+
 a.tui-page-btn.tui-next-is-ellip.tui-last-child,
 a.tui-page-btn.tui-prev-is-ellip.tui-first-child,
 a.tui-page-btn.tui-last,
@@ -24,14 +38,10 @@ a.tui-page-btn.tui-first{
 }
 
 .box-movies{
-  @extend %centering-x;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
-  max-width: 767px;
-  padding-left: 20px;
-  padding-right: 20px;
 }
 
 @include media-from-tablet-resolution {
@@ -45,19 +55,14 @@ a.tui-page-btn.tui-first{
 
   .box-movies {
     gap: 30px;
-    padding-left: 30px;
-    padding-right: 30px;
-
   }
 
 }
 
 @include media-from-desktop-resolution {
   .box-movies {
-    width: 1280px;
-    gap: 15px;
+    gap: 30px 15px;
     justify-content: start;
-    max-width: none;
   }
 }
 
