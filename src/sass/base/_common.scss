@@ -37,4 +37,14 @@ button {
 body {
   font-family: var(--primary-font);
   color: var(--primary-text-color-theme-light);
+  display: flex;
+  flex-direction: column;
+}
+
+html, body {
+  height: 100%;
+}
+
+#content {
+  flex-grow: 2;
 }

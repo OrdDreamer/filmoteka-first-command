@@ -18,11 +18,33 @@ export default class FilmotekaAPI {
   }
 
   //  якщо не передавати timeWeek параметра повертає масив обєктів за день, якщо true за тиждень
-  async getMostPopular(timeWeek) {
+  // async getMostPopular(timeWeek) {
+  //   try {
+  //     let searchTime = `trending/movie/day?api_key=${this._apiKey}&page=${this.page}&language=${this.language}`;
+  //     if (timeWeek) {
+  //       searchTime = `trending/movie/week?api_key=${this._apiKey}&page=${this.page}&language=${this.language}`;
+  //     }
+  //     const response = await axios.get(searchTime);
+  //     this.totalPages = response.data.total_pages;
+  //     this.totalResults = response.data.total_results;
+  //     const array = {
+  //       arrId: response.data.results.map(result => result.id),
+  //       page: response.data.page,
+  //       totalPages: response.data.total_pages,
+  //       totalResults: response.data.total_results,
+  //       finded: response.data.results,
+  //     };
+  //     return array;
+  //   } catch (error) {
+  //     throw new Error(error.message);
+  //   }
+  // }
+
+  async getMostPopular(page = 1, timeWeek) {
     try {
-      let searchTime = `trending/movie/day?api_key=${this._apiKey}&page=${this.page}&language=${this.language}`;
+      let searchTime = `trending/movie/day?api_key=${this._apiKey}&page=${page}&language=${this.language}`;
       if (timeWeek) {
-        searchTime = `trending/movie/week?api_key=${this._apiKey}&page=${this.page}&language=${this.language}`;
+        searchTime = `trending/movie/week?api_key=${this._apiKey}&page=${page}&language=${this.language}`;
       }
       const response = await axios.get(searchTime);
       this.totalPages = response.data.total_pages;
@@ -41,11 +63,33 @@ export default class FilmotekaAPI {
   }
 
   // Пошук фільму за ключовим словом і вибір сторінки
-  async searchMovie(query) {
+  // async searchMovie(query) {
+  //   try {
+  //     this.query = query;
+  //     const response = await axios.get(
+  //       `search/movie?api_key=${this._apiKey}&query=${this.query}&page=${this.page}&include_adult=false`
+  //     );
+  //     this.totalPages = response.data.total_pages;
+  //     this.totalResults = response.data.total_results;
+  //     console.log(response);
+  //     const array = {
+  //       arrId: response.data.results.map(result => result.id),
+  //       finded: response.data.results,
+  //       page: response.data.page,
+  //       totalPages: response.data.total_pages,
+  //       totalResults: response.data.total_results,
+  //     };
+  //     return array;
+  //   } catch (error) {
+  //     throw new Error(error.message);
+  //   }
+  // }
+
+  async searchMovie(query, page = 1) {
     try {
       this.query = query;
       const response = await axios.get(
-        `search/movie?api_key=${this._apiKey}&query=${this.query}&page=${this.page}&include_adult=false`
+        `search/movie?api_key=${this._apiKey}&query=${this.query}&page=${page}&include_adult=false`
       );
       this.totalPages = response.data.total_pages;
       this.totalResults = response.data.total_results;
@@ -147,12 +191,16 @@ export default class FilmotekaAPI {
   }
 
   // повертає список жанрів
-  async getGeners() {
+  async getGenres() {
+    if (this.genres) {
+      return Promise.resolve(this.genres);
+    }
     try {
       const response = await axios.get(
         `genre/movie/list?api_key=${this._apiKey}&language=${this.language}`
       );
-      return response.data;
+      this.genres = response.data.genres;
+      return this.genres;
     } catch (error) {
       throw new Error(error.message);
     }
