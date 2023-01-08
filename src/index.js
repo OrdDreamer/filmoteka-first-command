@@ -1,5 +1,5 @@
 import FilmotekaAPI from './js/FilmotekaAPI';
-import { anchors, scrollpos } from './js/anchor';
+import { anchors, initAnchors, scrollpos } from './js/anchor';
 import { Header } from './js/header';
 
 import * as Handlebars from 'handlebars';
@@ -55,6 +55,7 @@ class App {
     this.initContainer();
 
     initAboutTeam();
+    initAnchors();
   }
 
   initNotification() {
