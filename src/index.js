@@ -13,6 +13,7 @@ import './js/modal_team.js';
 import { Notiflix } from './js/Notiflix';
 import { Preloader } from './js/Preloader';
 import ItemContainer from './js/ItemContainer';
+import ContainerInfo from './js/ContainerInfo';
 
 
 class App {
@@ -51,6 +52,7 @@ class App {
     this.initNotification();
     this.initPreloader();
     this.initHeader();
+    this.initContainerInfo();
     this.initContainer();
   }
 
@@ -69,6 +71,10 @@ class App {
     this.header.addListenersOnSearchInput(this.handleSearchInput);
     this.header.addListenersOnChangePage(this.handleChangePage);
     this.header.addListenersOnChangeLibrarySection(this.handleChangeLibrarySection);
+  }
+
+  initContainerInfo() {
+    this.containerInfo = new ContainerInfo("#content-info");
   }
 
   initContainer() {
@@ -171,12 +177,14 @@ class App {
   }
 
   drawContainer() {
+    this.containerInfo.clear();
+
     const code = this.getRandomCode();
     const callback = (res) => {
       if (!this.checkCode(code)) {
         return;
       }
-      this.showItems(res.finded, res.totalResults, res.page); // TODO change totalPages to totalItems
+      this.showItems(res.finded, res.totalResults, res.page);
     };
 
     if (this.state.page === "home") {
@@ -192,6 +200,17 @@ class App {
   }
 
   showItems(items, totalItems, page) {
+    const infoType = this.state.page === "home"
+      ? this.state.searchQuery
+        ? "search"
+        : "trend"
+      : this.state.page === "home" ? this.state.librarySection : "";
+
+    this.containerInfo.drawView({
+      type: infoType,
+      count: totalItems,
+    });
+
     this.itemContainer.drawView({
       items,
       totalItems,
