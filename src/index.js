@@ -1,5 +1,5 @@
 import FilmotekaAPI from './js/FilmotekaAPI';
-import { anchors, initAnchors, scrollpos } from './js/anchor';
+import { initAnchors } from './js/anchor';
 import { Header } from './js/header';
 
 import * as Handlebars from 'handlebars';
