@@ -12,6 +12,7 @@ import './js/team';
 import './js/modal_team.js';
 import { Notiflix } from './js/Notiflix';
 import { Preloader } from './js/Preloader';
+import ItemContainer from './js/ItemContainer';
 
 
 class App {
@@ -53,6 +54,7 @@ class App {
     this.initNotification();
     this.initPreloader();
     this.initHeader();
+    this.initContainer();
   }
 
   initNotification() {
@@ -70,6 +72,10 @@ class App {
     this.header.addListenersOnSearchInput(this.handleSearchInput); // TODO
     this.header.addListenersOnChangePage(this.handleChangePage); // TODO
     this.header.addListenersOnChangeLibrarySection(this.handleChangeLibrarySection); // TODO
+  }
+
+  initContainer() {
+    this.itemContainer = new ItemContainer("#content")
   }
 
   draw() {
@@ -103,7 +109,6 @@ class App {
       return firstValue === secondValue;
     });
   }
-
 
   handleChangePage = (page) => {
     switch (page) {
@@ -163,11 +168,11 @@ class App {
       page: 1,
     }
 
-    const callback = (data) => {
+    const callback = (res) => {
       if (!this.checkCode(code)) {
         return;
       }
-      this.showItems(data);
+      this.showItems(res.finded, res.page, res.totalPages); // TODO change totalPages to totalItems
     };
 
     if (!query) {
@@ -180,7 +185,12 @@ class App {
     this.apiService.searchMovie(query).then(callback);
   }
 
-  showItems(data) {
+  showItems(items, totalItems, page) {
+    this.itemContainer.drawView({
+      items,
+      totalItems,
+      page,
+    })
   }
 
   getRandomCode() {
