@@ -8,12 +8,11 @@ import { getAuth } from 'firebase/auth';
 import { initFirebase } from './js/firebase';
 import { userSignIn, userSignOut } from './js/auth';
 
-import './js/team';
-import './js/modal_team.js';
 import { Notiflix } from './js/Notiflix';
 import { Preloader } from './js/Preloader';
 import ItemContainer from './js/ItemContainer';
 import ContainerInfo from './js/ContainerInfo';
+import { initAboutTeam } from './js/team';
 
 
 class App {
@@ -54,6 +53,8 @@ class App {
     this.initHeader();
     this.initContainerInfo();
     this.initContainer();
+
+    initAboutTeam();
   }
 
   initNotification() {
