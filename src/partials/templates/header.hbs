@@ -8,7 +8,7 @@
         <li>
           <button
             id="header-home"
-            class="nav-button {{#if (ifequal page 'home')}}current{{/if}}"
+            class="nav-button {{#if (ifequal url 'home')}}current{{/if}}"
           >
             Home
           </button>
@@ -16,7 +16,7 @@
         <li>
           <button
             id="header-library"
-            class="nav-button {{#if (ifequal page 'library')}}current{{/if}}"
+            class="nav-button {{#if (ifequal url 'library')}}current{{/if}}"
           >
             My Library
           </button>
@@ -39,7 +39,7 @@
 
 </div>
 
-{{#if (ifequal page "library")}}
+{{#if (ifequal url "library")}}
 
   <div class="library-filter">
     <ul class="list library-filter__list">
