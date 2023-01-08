@@ -1,4 +1,4 @@
-## Доброго вечора, ми з GoIT!
+# Доброго вечора, ми з GoIT!
 
 Ми - команда **"КодоТворці"**, випускники курсу **Java Script**. Фінальною роботою для нас став
 командний проєкт під назвою **Фільмотека**.
@@ -11,7 +11,7 @@
 найпопулярніші новинки кіно* :white_check_mark: *надає інформацію про фільм і можливість переглянути
 трейлер\*
 
-# Над проєктом наполегливо працювали розробники:
+## Над проєктом наполегливо працювали розробники:
 
 - [Team Lead & Web Developer: Роман Сніцаренко](https://github.com/OrdDreamer)
 - [Scrum Master & Web Developer: Ольга Височанська](https://github.com/OlgaVysochanska)
@@ -24,12 +24,12 @@
 - [Web Developer: Іван Панін](https://github.com/IvanPanin675)
 - [Web Developer: Валентина Дей](https://github.com/ValentinaDej)
 
-# У процесі розробки ми
+## У процесі розробки ми
 
 :pushpin: закріпили отиманні знання HTML/CSS, JavaScript :pushpin: попрацювали зі збірником Parcel
 :pushpin: зміцнили навички роботи з GitHub :pushpin: прокачали скіли злагодженої роботи в команді
 
-# Завдяки нашим старанням отримав життя додаток [:point*right:*Фільмотека\_:point_left:](https://orddreamer.github.io/filmoteka-first-command/)
+## Завдяки нашим старанням отримав життя додаток [:point*right:*Фільмотека\_:point_left:](https://orddreamer.github.io/filmoteka-first-command/)
 
 <a href="https://orddreamer.github.io/filmoteka-first-command/"><img src="./src/image/header/background-library-desktop-1x.png" alt="Filmoteka" border="0"></a>
 
