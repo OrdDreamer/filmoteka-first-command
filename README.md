@@ -2,6 +2,7 @@
 
 Ми - команда **"КодоТворці:magic_wand:"**, випускники курсу **Java Script**. Фінальною роботою для нас став командний проєкт під назвою **Фільмотека**.
 
+
 :hammer_and_wrench: Ми розробили сервіс, який
 
 :white_check_mark: _здійснює авторизацію користувача_
@@ -16,6 +17,7 @@
 
 :white_check_mark: _надає інформацію про фільм і можливість переглянути трейлер_
 
+
 ### Над проєктом наполегливо працювали розробники:
 
 - [Team Lead & Web Developer: Роман Сніцаренко](https://github.com/OrdDreamer)
@@ -29,6 +31,7 @@
 - [Web Developer: Іван Панін](https://github.com/IvanPanin675)
 - [Web Developer: Валентина Дей](https://github.com/ValentinaDej)
 
+
 ### У процесі розробки ми
 
 :pushpin: закріпили отиманні знання HTML/CSS, JavaScript
@@ -39,7 +42,8 @@
 
 :pushpin: прокачали скіли злагодженої роботи в команді
 
-## Завдяки нашим старанням отримав життя додаток [:point_right:_Фільмотека_:point_left:](https://orddreamer.github.io/filmoteka-first-command/)
+
+## Завдяки нашим старанням отримав життя додаток [:point_right::film_strip:_Фільмотека_:point_left:](https://orddreamer.github.io/filmoteka-first-command/)
 
 <a href="https://orddreamer.github.io/filmoteka-first-command/"><img src="./src/image/header/background-library-desktop-1x.png" alt="Filmoteka" border="0"></a>
 
