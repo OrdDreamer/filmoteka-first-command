@@ -26,11 +26,8 @@ class App {
     this.state = {
       page: "home",
       librarySection: "watched",
-      filtersConfig: {
-        type: "trend", // "search", "watched", "queue"
-        searchQuery: "",
-        pageNumber: 1,
-      },
+      searchQuery: "",
+      pageNumber: 1,
       processCode: null,
     };
 
@@ -69,23 +66,19 @@ class App {
     this.header = new Header('#header');
     this.header.addListenersOnSignOut(userSignOut);
     this.header.addListenersOnSignIn(userSignIn);
-    this.header.addListenersOnSearchInput(this.handleSearchInput); // TODO
-    this.header.addListenersOnChangePage(this.handleChangePage); // TODO
-    this.header.addListenersOnChangeLibrarySection(this.handleChangeLibrarySection); // TODO
+    this.header.addListenersOnSearchInput(this.handleSearchInput);
+    this.header.addListenersOnChangePage(this.handleChangePage);
+    this.header.addListenersOnChangeLibrarySection(this.handleChangeLibrarySection);
   }
 
   initContainer() {
-    this.itemContainer = new ItemContainer("#content")
+    this.itemContainer = new ItemContainer("#content");
+    this.itemContainer.addListenerOnChangePage(this.handleChangeContainerPage);
   }
 
   draw() {
-    // TODO Remove start
-
-    console.log('Draw');
-    console.log(this.user ? 'Authenticated user' : 'Not authenticated user');
-    // TODO Remove end
-
     this.drawHeader();
+    this.drawContainer();
   }
 
   drawHeader() {
@@ -127,12 +120,15 @@ class App {
 
   showHomePage() {
     this.state.page = "home";
+    this.state.pageNumber = 1;
+    this.state.searchQuery = "";
     this.draw();
   }
 
   showLibraryPage() {
     this.state.page = "library";
     this.state.librarySection = "watched";
+    this.state.pageNumber = 1;
     this.draw();
   }
 
@@ -162,27 +158,36 @@ class App {
   }
 
   handleSearchInput = (query) => {
-    const code = this.getRandomCode();
-    this.state.filtersConfig = {
-      searchQuery: query || "",
-      page: 1,
-    }
+    this.state.searchQuery = query || "";
+    this.state.pageNumber = 1;
 
+    this.drawContainer();
+  }
+
+  handleChangeContainerPage = (page) => {
+    this.state.pageNumber = page;
+    this.drawContainer();
+  }
+
+  drawContainer() {
+    const code = this.getRandomCode();
     const callback = (res) => {
       if (!this.checkCode(code)) {
         return;
       }
-      this.showItems(res.finded, res.page, res.totalPages); // TODO change totalPages to totalItems
+      this.showItems(res.finded, res.totalResults, res.page); // TODO change totalPages to totalItems
     };
 
-    if (!query) {
-      this.state.filtersConfig.type = "trend";
-      this.apiService.getMostPopular().then(callback); // TODO timeWeek
-      return;
+    if (this.state.page === "home") {
+      if (!this.state.searchQuery) {
+        this.apiService.getMostPopular(this.state.pageNumber).then(callback); // TODO timeWeek
+        return;
+      }
+      this.apiService.searchMovie(this.state.searchQuery, this.state.pageNumber).then(callback);
+    } else if (this.state.page === "library") {
+      // TODO library
     }
 
-    this.state.filtersConfig.type = "search";
-    this.apiService.searchMovie(query).then(callback);
   }
 
   showItems(items, totalItems, page) {
