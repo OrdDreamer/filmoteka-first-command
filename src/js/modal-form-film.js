@@ -1,5 +1,7 @@
 import modalFormFilmTemplate from '../partials/templates/modal-form-film.hbs';
 
+let btnClose;
+let backdrop;
 export class FilmModalWindow {
   constructor(targetSelector) {
     this.refs = this.getRefs(targetSelector);
@@ -44,6 +46,18 @@ export class FilmModalWindow {
     if (arrowNext) {
       arrowNext.addEventListener('click', this.showNext);
     }
+
+    btnClose = document.querySelector('.lightbox__close-btn');
+    if (btnClose) {
+      btnClose.addEventListener('click', closeModalWindow);
+    }
+
+    // backdrop = document.querySelector('[data-modal="backdrop"]');
+    // if (backdrop) {
+    //   backdrop.addEventListener('click', closeToBackdrop);
+    // }
+
+    window.addEventListener('keydown', onEscKeyPress);
   }
 
   removeListeners() {
@@ -104,5 +118,27 @@ export class FilmModalWindow {
     if (typeof callback === 'function') {
       this.showPrevCallbacks.add(callback);
     }
+  }
+}
+
+function closeModalWindow() {
+  //if (!backdrop.classList.contains('visually-hidden')) {
+  document.querySelector('#film-info').classList.add('visually-hidden');
+  btnClose.removeEventListener('click', closeModalWindow);
+  window.removeEventListener('keydown', onEscKeyPress);
+  backdrop.removeEventListener('click', closeToBackdrop);
+  //}
+}
+
+// function closeToBackdrop(e) {
+//   const name = e.target.className;
+//   if (name === 'backdrop') {
+//     closeModalWindow();
+//   }
+// }
+
+function onEscKeyPress(e) {
+  if (e.code === 'Escape') {
+    closeModalWindow();
   }
 }
