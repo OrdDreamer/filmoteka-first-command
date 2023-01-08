@@ -77,6 +77,7 @@ class App {
   }
 
   draw() {
+    this.itemContainer.clear();
     this.drawHeader();
     this.drawContainer();
   }

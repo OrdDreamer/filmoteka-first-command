@@ -81,6 +81,10 @@ export default class ItemContainer {
     };
   }
 
+  clear() {
+    this.refs.target.innerHTML = "";
+  }
+
   handleChangePage = (event) => {
     for (const callback of this.changePageCallbaks) {
       callback(event.page);
