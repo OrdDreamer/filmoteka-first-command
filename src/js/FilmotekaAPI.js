@@ -191,12 +191,16 @@ export default class FilmotekaAPI {
   }
 
   // повертає список жанрів
-  async getGeners() {
+  async getGenres() {
+    if (this.genres) {
+      return Promise.resolve(this.genres);
+    }
     try {
       const response = await axios.get(
         `genre/movie/list?api_key=${this._apiKey}&language=${this.language}`
       );
-      return response.data;
+      this.genres = response.data.genres;
+      return this.genres;
     } catch (error) {
       throw new Error(error.message);
     }

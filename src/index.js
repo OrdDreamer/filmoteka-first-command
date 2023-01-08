@@ -199,7 +199,9 @@ class App {
 
   }
 
-  showItems(items, totalItems, page) {
+  async showItems(items, totalItems, page) {
+    const genres = await this.apiService.getGenres();
+
     const infoType = this.state.page === "home"
       ? this.state.searchQuery
         ? "search"
@@ -215,6 +217,7 @@ class App {
       items,
       totalItems,
       page,
+      genres,
     })
   }
 
