@@ -1,4 +1,4 @@
-export const anchors = document.querySelectorAll('a[href*="#"]');
+export const anchors = document.querySelectorAll('a[href*="#anchor-"]');
 
 for (let anchor of anchors) {
   anchor.addEventListener('click', function (event) {
@@ -14,7 +14,7 @@ for (let anchor of anchors) {
 let scrollpos = window.scrollY;
 
 const anchorLinkEl = document.querySelector('.anchor-link');
-const scrollChange = 1;
+const scrollChange = 100;
 
 const addClassOnScroll = () => {
   anchorLinkEl.classList.add('hide');

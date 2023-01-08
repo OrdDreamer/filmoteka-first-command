@@ -1,6 +1,7 @@
-.film-card__link {
+.film-card {
   display: inline-block;
   border-radius: 5px;
+  cursor: pointer;
 
   transition: box-shadow var(--transition-dur-and-fun);
 
