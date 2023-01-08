@@ -11,10 +11,3 @@ export class Preloader {
     return Preloader.refs.loaderEl.classList.add('preloader-invisible');
   }
 }
-
-// экземпляр класса
-// const loader = new Preloader();
-
-// вызов методов класса
-// loader.showLoader();
-// loader.hideLoader();
