@@ -79,4 +79,5 @@ function getGenres(genresArray, listOfGenreNames) {
   if (genresArray.length > 2) {
     return `${getGenre(genresArray[0])}, ${getGenre(genresArray[1])}, Other`;
   }
+  return "";
 }
