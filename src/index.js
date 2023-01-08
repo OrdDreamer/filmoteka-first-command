@@ -3,15 +3,15 @@ import * as Handlebars from 'handlebars';
 import { getAuth } from 'firebase/auth';
 import { initFirebase } from './js/firebase';
 import { userSignIn, userSignOut } from './js/auth';
-
 import FilmotekaAPI from './js/FilmotekaAPI';
-import { Header } from './js/Header';
-import { Notiflix } from './js/Notiflix';
-import { Preloader } from './js/Preloader';
-import ItemContainer from './js/ItemContainer';
-import ContainerInfo from './js/ContainerInfo';
-import { initAboutTeam } from './js/team';
-import { initAnchors } from './js/anchor';
+
+import { Header } from './js/view/Header';
+import { Notiflix } from './js/view/Notiflix';
+import { Preloader } from './js/view/Preloader';
+import ItemContainer from './js/view/ItemContainer';
+import ContainerInfo from './js/view/ContainerInfo';
+import { initAboutTeam } from './js/view/team';
+import { initAnchors } from './js/view/anchor';
 
 
 class App {

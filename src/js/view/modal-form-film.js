@@ -1,4 +1,4 @@
-import modalFormFilmTemplate from '../partials/templates/modal-form-film.hbs';
+import modalFormFilmTemplate from '../../partials/templates/modal-form-film.hbs';
 
 export class FilmModalWindow {
   constructor(targetSelector) {

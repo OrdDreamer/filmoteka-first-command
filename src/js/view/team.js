@@ -1,8 +1,8 @@
 import { refs } from "./refs-team";
 import { openModalWindow } from './openModalWindow.js';
-import contactsArr from '../data-team/team.json';
-import contactsTmpl from '../partials/templates/team-list.hbs';
-import sprite from '../data-team/sprite.svg';
+import contactsArr from '../../data-team/team.json';
+import contactsTmpl from '../../partials/templates/team-list.hbs';
+import sprite from '../../data-team/sprite.svg';
 
 const { contactsLink } = refs;
 

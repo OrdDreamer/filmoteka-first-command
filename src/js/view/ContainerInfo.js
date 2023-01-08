@@ -1,4 +1,4 @@
-import containerInfoTemplate from "../partials/templates/container-info.hbs"
+import containerInfoTemplate from "../../partials/templates/container-info.hbs"
 
 export default class ContainerInfo {
   constructor(targetSelector) {

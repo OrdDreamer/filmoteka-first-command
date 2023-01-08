@@ -1,5 +1,5 @@
-import headerTemplate from "../partials/templates/header.hbs";
-import sprite from '../images/symbol-defs.svg';
+import headerTemplate from "../../partials/templates/header.hbs";
+import sprite from '../../images/symbol-defs.svg';
 import debounce from "lodash.debounce";
 
 const DEBOUNCE_DELAY = 1000;

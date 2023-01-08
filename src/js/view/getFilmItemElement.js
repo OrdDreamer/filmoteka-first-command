@@ -44,7 +44,7 @@
 //     .join('');
 // }
 
-import filmItemTemplate from '../partials/templates/film-item.hbs';
+import filmItemTemplate from '../../partials/templates/film-item.hbs';
 
 export function getFilmItemElement(data, listOfGenreNames, customClasses = "") {
   return filmItemTemplate({
