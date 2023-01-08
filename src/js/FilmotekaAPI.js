@@ -78,6 +78,7 @@ export default class FilmotekaAPI {
 
       return {
         title: data.title,
+        originalTitle: data.title,
         about: data.overview,
         genres: data.genres.map(genre => genre.name),
         release: data.release_date,
