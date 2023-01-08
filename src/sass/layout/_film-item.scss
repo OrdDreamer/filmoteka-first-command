@@ -1,5 +1,7 @@
 .film-card {
-  display: inline-block;
+  //display: inline-block;
+  display: flex;
+  flex-direction: column;
   border-radius: 5px;
   cursor: pointer;
 
@@ -12,7 +14,7 @@
   }
 }
 
-.film-card__picture {
+.filmoteka__image {
   display: block;
   margin-bottom: 10px;
 }
@@ -27,6 +29,25 @@
   @include media-from-desktop-resolution {
     font-size: 20px;
     line-height: 1.2;
+  }
+}
+
+.image-plug {
+  background-color: #f7f7f7;
+  height: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 2;
+  margin-bottom: 10px;
+  min-height: 12rem;
+
+  &::after {
+    content: "?";
+    display: block;
+    opacity: 0.1;
+    font-weight: 700;
+    font-size: 10rem;
   }
 }
 
