@@ -24,7 +24,7 @@ export default class ItemContainer {
 
   drawView(data) {
     const itemsMarkup = data.items.map((itemData) => {
-      return getFilmItemElement(itemData, data.genres, "film-item-size");
+      return getFilmItemElement(itemData, "film-item-size");
     }).join("");
     this.refs.target.innerHTML = this.template({ items: itemsMarkup });
 
