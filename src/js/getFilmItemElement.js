@@ -44,16 +44,9 @@
 //     .join('');
 // }
 
-// export function getFilmItemElement({ id, image, title, genres, yearOfPub, rating }) {
-//   return `
-//     <div>
-//       Film item element
-//     </div>
-//   `;
-// }
 import filmItemTemplate from '../partials/templates/film-item.hbs';
 
-export function getFilmItemElement(data, customClasses = "") {
+export function getFilmItemElement(data, listOfGenreNames, customClasses = "") {
   return filmItemTemplate({
     customClasses,
     filmId: data.id,
@@ -65,20 +58,25 @@ export function getFilmItemElement(data, customClasses = "") {
     // mobileImage2x:
     imageDescription: data.original_title,
     title: data.title,
-    // genres: getGenres(data.genresArray),
+    genres: getGenres(data.genre_ids, listOfGenreNames),
     year: Number.parseInt(data.release_date),
     rating: data.vote_average.toFixed(1),
   });
 }
 
-function getGenres(genresArray) {
+function getGenres(genresArray, listOfGenreNames) {
+  const getGenre = function(id) {
+    const result = listOfGenreNames.find((element) => element.id === id);
+    return result ? result.name : "";
+  }
+
   if ((genresArray.length = 1)) {
-    return `${genresArray[0]}`;
+    return `${getGenre(genresArray[0])}`;
   }
   if ((genresArray.length = 2)) {
-    return `${genresArray[0]}, ${genresArray[1]}`;
+    return `${getGenre(genresArray[0])}, ${getGenre(genresArray[1])}`;
   }
   if (genresArray.length > 2) {
-    return `${genresArray[0]}, ${genresArray[1]}, Other`;
+    return `${getGenre(genresArray[0])}, ${getGenre(genresArray[1])}, Other`;
   }
 }

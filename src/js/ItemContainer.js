@@ -1,4 +1,4 @@
-import { getFilmItemElement } from "./film-item";
+import { getFilmItemElement } from "./getFilmItemElement";
 import Pagination from "tui-pagination";
 import * as Handlebars from "handlebars";
 
@@ -24,7 +24,7 @@ export default class ItemContainer {
 
   drawView(data) {
     const itemsMarkup = data.items.map((itemData) => {
-      return getFilmItemElement(itemData, "film-item-size");
+      return getFilmItemElement(itemData, data.genres, "film-item-size");
     }).join("");
     this.refs.target.innerHTML = this.template({ items: itemsMarkup });
 
