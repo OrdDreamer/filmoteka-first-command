@@ -86,6 +86,10 @@ export default class ItemContainer {
   }
 
   handleChangePage = (event) => {
+    this.refs.target.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
     for (const callback of this.changePageCallbaks) {
       callback(event.page);
     }
