@@ -4,32 +4,32 @@
   margin-left: auto;
   margin-right: auto;
   width: 100%;
-  background-image: url(/src/image/header/background-header-mobile-1x.png);
+  background-image: url(/src/images/header/background-header-mobile-1x.png);
   padding: 40px 20px;
   height: 230px;
   max-width: 320px;
 
   @include media-from-tablet-resolution {
     max-width: 768px;
-    background-image: url(/src/image/header/background-header-tablet-1x.png);
+    background-image: url(/src/images/header/background-header-tablet-1x.png);
     padding: 40px 32px;
     height: 216px;
   }
 
   @include media-from-desktop-resolution {
     max-width: 1280px;
-    background-image: url(/src/image/header/background-header-x1.png);
+    background-image: url(/src/images/header/background-header-x1.png);
   }
 
   &.library {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),url(/src/image/header/background-library-mobile-1x.png);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),url(/src/images/header/background-library-mobile-1x.png);
 
     @include media-from-tablet-resolution{
-      background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),url(/src/image/header/background-library-tablet-1x.png);
+      background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),url(/src/images/header/background-library-tablet-1x.png);
     }
 
     @include media-from-desktop-resolution {
-      background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),url(/src/image/header/background-library-desktop-1x.png);
+      background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),url(/src/images/header/background-library-desktop-1x.png);
     }
   }
 }
@@ -50,7 +50,7 @@
   align-items: center;
   margin-right: auto;
   pointer-events: none;
-  
+
 }
 
 .logo__icon{
@@ -197,7 +197,7 @@
   border-bottom: 2px solid var(--primary-text-color-theme-dark);
   outline: none;
   background: transparent;
-  
+
   &:hover,
   &:focus {
     border-bottom: 2px solid var(--accent-color);
@@ -269,7 +269,7 @@
     background-color: var(--accent-color);
     box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
   }
-  
+
   width: 130px;
   height: 44px;
 

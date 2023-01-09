@@ -114,7 +114,7 @@ class App {
   drawHeader() {
     this.header.drawView({
       authenticate: Boolean(this.user),
-      page: this.state.url,
+      url: this.state.url,
       librarySection: this.state.librarySection,
     });
   }
