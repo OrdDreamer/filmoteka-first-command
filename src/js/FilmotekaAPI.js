@@ -2,185 +2,124 @@ import axios from 'axios';
 
 axios.defaults.baseURL = `https://api.themoviedb.org/3/`;
 
-const apiKey = '6c57fb02719926393bb8c06aa147886f';
+const API_KEY = '6c57fb02719926393bb8c06aa147886f';
+const LANGUAGE = 'en-US';
 
 export default class FilmotekaAPI {
-  constructor() {
-    this._apiKey = apiKey;
-    this.genre = [];
-    this.query = '';
-    this.page = 1;
-    this.totalPages = 0;
-    this.totalResults = 0;
-    this.movie_id = 560;
-    this.posterID = '';
-    this.language = 'en-US';
-  }
-
-  //  якщо не передавати timeWeek параметра повертає масив обєктів за день, якщо true за тиждень
-  // async getMostPopular(timeWeek) {
-  //   try {
-  //     let searchTime = `trending/movie/day?api_key=${this._apiKey}&page=${this.page}&language=${this.language}`;
-  //     if (timeWeek) {
-  //       searchTime = `trending/movie/week?api_key=${this._apiKey}&page=${this.page}&language=${this.language}`;
-  //     }
-  //     const response = await axios.get(searchTime);
-  //     this.totalPages = response.data.total_pages;
-  //     this.totalResults = response.data.total_results;
-  //     const array = {
-  //       arrId: response.data.results.map(result => result.id),
-  //       page: response.data.page,
-  //       totalPages: response.data.total_pages,
-  //       totalResults: response.data.total_results,
-  //       finded: response.data.results,
-  //     };
-  //     return array;
-  //   } catch (error) {
-  //     throw new Error(error.message);
-  //   }
-  // }
 
   async getMostPopular(page = 1, timeWeek) {
     try {
-      let searchTime = `trending/movie/day?api_key=${this._apiKey}&page=${page}&language=${this.language}`;
-      if (timeWeek) {
-        searchTime = `trending/movie/week?api_key=${this._apiKey}&page=${page}&language=${this.language}`;
+      const reqURL = `trending/movie/${timeWeek ? 'week' : 'day'}?api_key=${API_KEY}&page=${page}&language=${LANGUAGE}`;
+      const response = await axios.get(reqURL);
+
+      if (!this.genres) {
+        await this.getGenres();
       }
-      const response = await axios.get(searchTime);
-      this.totalPages = response.data.total_pages;
-      this.totalResults = response.data.total_results;
-      const array = {
-        arrId: response.data.results.map(result => result.id),
+      return {
         page: response.data.page,
         totalPages: response.data.total_pages,
         totalResults: response.data.total_results,
-        finded: response.data.results,
+        results: response.data.results.map(element => {
+          return {
+            title: element.title,
+            about: element.overview,
+            release: element.release_date,
+            voteAverage: element.vote_average,
+            voteCount: element.vote_count,
+            popularity: element.popularity,
+            id: element.id,
+            genres: element.genre_ids.map(id => this.getGenre(id)),
+            poster: element.poster_path ? `https://image.tmdb.org/t/p/original${element.poster_path}` : null,
+          };
+        }),
       };
-      return array;
     } catch (error) {
       throw new Error(error.message);
     }
   }
-
-  // Пошук фільму за ключовим словом і вибір сторінки
-  // async searchMovie(query) {
-  //   try {
-  //     this.query = query;
-  //     const response = await axios.get(
-  //       `search/movie?api_key=${this._apiKey}&query=${this.query}&page=${this.page}&include_adult=false`
-  //     );
-  //     this.totalPages = response.data.total_pages;
-  //     this.totalResults = response.data.total_results;
-  //     console.log(response);
-  //     const array = {
-  //       arrId: response.data.results.map(result => result.id),
-  //       finded: response.data.results,
-  //       page: response.data.page,
-  //       totalPages: response.data.total_pages,
-  //       totalResults: response.data.total_results,
-  //     };
-  //     return array;
-  //   } catch (error) {
-  //     throw new Error(error.message);
-  //   }
-  // }
 
   async searchMovie(query, page = 1) {
     try {
       this.query = query;
       const response = await axios.get(
-        `search/movie?api_key=${this._apiKey}&query=${this.query}&page=${page}&include_adult=false`
+        `search/movie?api_key=${API_KEY}&query=${this.query}&page=${page}&include_adult=false`,
       );
-      this.totalPages = response.data.total_pages;
-      this.totalResults = response.data.total_results;
-      console.log(response);
-      const array = {
-        arrId: response.data.results.map(result => result.id),
-        finded: response.data.results,
+      if (!this.genres) {
+        await this.getGenres();
+      }
+      return {
         page: response.data.page,
         totalPages: response.data.total_pages,
         totalResults: response.data.total_results,
+        results: response.data.results.map(element => {
+          return {
+            title: element.title,
+            about: element.overview,
+            release: element.release_date,
+            voteAverage: element.vote_average,
+            voteCount: element.vote_count,
+            popularity: element.popularity,
+            id: element.id,
+            genres: element.genre_ids.map(id => this.getGenre(id)),
+            poster: element.poster_path ? `https://image.tmdb.org/t/p/original${element.poster_path}` : null,
+          };
+        }),
       };
-      return array;
     } catch (error) {
       throw new Error(error.message);
     }
   }
 
-  // Отримання короткої інформації кінофільму за допомогою ID та ширини постеру для адаптиву та ретіни у галерею
-  async getInfoCardGallery(movie_id, posterWidth) {
+  async getFilmInfo(movie_id) {
     try {
-      const response = await axios.get(
-        `movie/${movie_id}?api_key=${this._apiKey}&language=${this.language}`
-      );
-      const poster = this.getPoster(movie_id, posterWidth);
-      const array = {
-        title: response.data.title,
-        genre: response.data.genres.map(genre => genre.name),
-        release: response.data.release_date,
-        vote: response.data.vote_average,
-        poster: poster,
+      const data = await axios.get(
+        `movie/${movie_id}?api_key=${API_KEY}&language=${LANGUAGE}`,
+      ).then(res => res.data);
+
+      return {
+        title: data.title,
+        originalTitle: data.title,
+        about: data.overview,
+        genres: data.genres.map(genre => genre.name),
+        release: data.release_date,
+        poster: data.poster_path ? `https://image.tmdb.org/t/p/original${data.poster_path}` : null,
+        voteAverage: data.vote_average,
+        voteCount: data.vote_count,
+        popularity: data.popularity,
+        id: movie_id,
       };
-      return array;
     } catch (error) {
       throw new Error(error.message);
     }
   }
 
-  // Отримання повної інформації кінофільму за допомогою ID  та ширини постеру для адаптиву та ретіни у модалку
-  async getInfoCardModal(movie_id, posterWidth) {
-    try {
-      if (movie_id) {
-        this.movie_id = movie_id;
-      }
-      const response = await axios.get(
-        `movie/${this.movie_id}?api_key=${this._apiKey}&language=${this.language}`
-      );
-      const array = {
-        title: response.data.title,
-        genre: response.data.genres.map(genre => genre.name).join(', '),
-        release: response.data.release_date,
-        vote: response.data.vote_average,
-        votes: response.data.vote_count,
-        popularity: response.data.popularity,
-        originalTitle: response.data.original_title,
-        about: response.data.overview,
-        poster: this.getPoster(movie_id, posterWidth),
-      };
-      return array;
-    } catch (error) {
-      throw new Error(error.message);
-    }
-  }
-
-  // Отримання посилання трейлера з ютуб
   async getVideo(movie_id) {
     try {
       if (movie_id) {
         this.movie_id = movie_id;
       }
       const response = await axios.get(
-        `movie/${this.movie_id}/videos?api_key=${this._apiKey}&language=${this.language}`
+        `movie/${this.movie_id}/videos?api_key=${API_KEY}&language=${LANGUAGE}`,
       );
       const videoID = response.data.results.map(result => result.key).slice(0, 1);
-      return `https://www.themoviedb.org/video/play?key=${videoID}`;
+      return `https://www.youtube.com/embed/${videoID}`;
     } catch (error) {
       throw new Error(error.message);
     }
   }
 
   findClosest(x, arr) {
-    var indexArr = arr.map(function (k) {
+    var indexArr = arr.map(function(k) {
       return Math.abs(k - x);
     });
     var min = Math.min.apply(Math, indexArr);
     return indexArr.indexOf(min);
   }
 
-  // повертає постер найближеної ширини від заданої в колбек якщо не задано 500px
   async getPoster(movie_id, posterWidth = 500) {
     try {
-      const response = await axios.get(`movie/${movie_id}/images?api_key=${this._apiKey}`);
+      const response = await axios.get(`movie/${movie_id}/images?api_key=${API_KEY}`);
+      console.log(response);
       const posterArrWidth = response.data.posters.map(poster => poster.width);
       const posterID = this.findClosest(posterWidth, posterArrWidth);
       const PosterURL = response.data.posters[posterID].file_path;
@@ -190,14 +129,13 @@ export default class FilmotekaAPI {
     }
   }
 
-  // повертає список жанрів
   async getGenres() {
     if (this.genres) {
       return Promise.resolve(this.genres);
     }
     try {
       const response = await axios.get(
-        `genre/movie/list?api_key=${this._apiKey}&language=${this.language}`
+        `genre/movie/list?api_key=${API_KEY}&language=${LANGUAGE}`,
       );
       this.genres = response.data.genres;
       return this.genres;
@@ -206,46 +144,9 @@ export default class FilmotekaAPI {
     }
   }
 
-  // додає сторінку
-  incrementPage() {
-    this.page += 1;
-  }
-
-  // віднімає сторінку
-  decrementPage() {
-    if (this.page !== 0) {
-      this.page -= 1;
-    }
-  }
-
-  // обнулює до першої сторінки
-  resetPage() {
-    this.page = 1;
-  }
-
-  // повертає поточну сторінку
-  getCurrentPage() {
-    return this.page;
-  }
-
-  //встановлює потрібну сторінку
-  setCurrentPage(setPage) {
-    if (Number(setPage) > 0) {
-      this.page = Number(setPage);
-    } else {
-      alert('Page must be > "0" !!!');
-    }
-  }
-
-  // повертає ID відео
-  getCurrentID() {
-    return this.movie_id;
-  }
-
-  // встановлює потрібний  ID відео
-  setCurrentID(newID) {
-    this.movie_id = Number(newID);
-  }
+  getGenre = (id) => {
+    return this.genres.find((element) => element.id === id).name || '';
+  };
 }
 
 

@@ -1,28 +1,9 @@
-<div class='film-card {{customClasses}}' data-id='${{filmId}}'>
-  <picture class='film-card__picture'>
-    <source
-      srcset='
-          {{desktopImage1x}} 1x,
-          {{desktopImage2x}} 2x
-        '
-      media='(min-width: 1280px'
-    />
-    <source
-      srcset='
-          {{tabletImage1x}} 1x,
-          {{tabletImage2x}} 2x
-        '
-      media='(min-width: 768px'
-    />
-    <source
-      srcset='
-          {{mobileImage1x}} 1x,
-          {{mobileImage2x}} 2x
-        '
-      media='(min-width: 320px'
-    />
-    <img src='{{mobileImage1x}}' alt=' {{imageDescription}}' class='filmoteka__image' />
-  </picture>
+<div class='film-card {{customClasses}}'>
+  {{#if poster}}
+  <img src='{{poster}}' alt=' {{imageDescription}}' class='filmoteka__image' />
+  {{ else }}
+  <div class='image-plug'></div>
+  {{/if}}
   <p class='film-card__name'> {{title}}</p>
   <p class='film-card__data'>
     {{genres}}
@@ -30,4 +11,5 @@
     <span class='film-card__year'> {{year}}</span>
     <span class='film-card__rating'>{{rating}}</span>
   </p>
+  <div data-id='{{filmId}}' class='click-trap'></div>
 </div>

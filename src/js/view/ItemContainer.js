@@ -3,7 +3,7 @@ import Pagination from "tui-pagination";
 import * as Handlebars from "handlebars";
 
 const template = `
-<div class="item-container box-movies">
+<div id="item-container" class="item-container box-movies">
   {{{items}}}
 </div>
 `
@@ -11,6 +11,7 @@ const template = `
 export default class ItemContainer {
   constructor(targetSelector) {
     this.changePageCallbaks = new Set();
+    this.clickCardCalbacks = new Set();
     this.refs = this.getRefs(targetSelector);
     this.initPagination();
     this.template = Handlebars.compile(template);
@@ -22,9 +23,17 @@ export default class ItemContainer {
     };
   }
 
+// Example data
+// {
+//   items: [],
+//   totalItems: 200,
+//   page: 2,
+// }
+
   drawView(data) {
+    this.removeListeners();
     const itemsMarkup = data.items.map((itemData) => {
-      return getFilmItemElement(itemData, data.genres, "film-item-size");
+      return getFilmItemElement(itemData, "film-item-size");
     }).join("");
     this.refs.target.innerHTML = this.template({ items: itemsMarkup });
 
@@ -32,19 +41,26 @@ export default class ItemContainer {
       return;
     }
 
-    this.pagination.off("afterMove", this.handleChangePage);
     this.pagination.setTotalItems(data.totalItems);
     this.pagination.movePageTo(data.page);
     this.refs.target.appendChild(this.paginationElement);
-    this.pagination.on("afterMove", this.handleChangePage);
+
+    this.addListeners();
   }
 
-// Example data
-// {
-//   items: [],
-//   totalItems: 200,
-//   page: 2,
-// }
+  addListeners() {
+    this.pagination.on("afterMove", this.handleChangePage);
+
+    const container = document.querySelector("#item-container");
+    container?.addEventListener("click", this.handleCardClick);
+  }
+
+  removeListeners() {
+    this.pagination.off("afterMove", this.handleChangePage);
+
+    const container = document.querySelector("#item-container");
+    container?.removeEventListener("click", this.handleCardClick);
+  }
 
   initPagination() {
     this.paginationElement = document.createElement("div");
@@ -101,6 +117,21 @@ export default class ItemContainer {
     }
   }
 
+  handleCardClick = (event) => {
+    const id = event.target.dataset.id;
+    if (!id) {
+      return;
+    }
+    for (const callback of this.clickCardCalbacks) {
+      callback(id);
+    }
+  }
+
+  addListenerOnClickCard(callback) {
+    if (typeof callback === "function") {
+      this.clickCardCalbacks.add(callback);
+    }
+  }
 }
 
 

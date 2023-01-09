@@ -12,6 +12,7 @@ import ItemContainer from './js/view/ItemContainer';
 import ContainerInfo from './js/view/ContainerInfo';
 import { initAboutTeam } from './js/view/team';
 import { initAnchors } from './js/view/anchor';
+import { FilmModalWindow } from './js/view/FilmModalWindow';
 
 
 class App {
@@ -23,11 +24,13 @@ class App {
     initFirebase();
 
     this.state = {
-      page: "home",
+      url: "home",
       librarySection: "watched",
       searchQuery: "",
       pageNumber: 1,
+      totalPages: 1,
       processCode: null,
+      items: [],
     };
 
     this.auth = getAuth();
@@ -36,7 +39,7 @@ class App {
     this.auth.onAuthStateChanged((res) => {
       this.preloader.hideLoader();
       this.user = res;
-      this.state.page = "home"
+      this.state.url = "home";
       this.showAuthNotification();
       this.draw();
     });
@@ -52,6 +55,7 @@ class App {
     this.initHeader();
     this.initContainerInfo();
     this.initContainer();
+    this.initFilmInfoModal();
 
     initAboutTeam();
     initAnchors();
@@ -81,6 +85,11 @@ class App {
   initContainer() {
     this.itemContainer = new ItemContainer("#content");
     this.itemContainer.addListenerOnChangePage(this.handleChangeContainerPage);
+    this.itemContainer.addListenerOnClickCard(this.handleClickCard);
+  }
+
+  initFilmInfoModal() {
+    this.filmInfoModal = new FilmModalWindow();
   }
 
   draw() {
@@ -89,10 +98,21 @@ class App {
     this.drawContainer();
   }
 
+  async drawFilmInfoModal(data) {
+    console.log(data);
+    if (!data.hasOwnProperty("videoSrc")) {
+      data.videoSrc = await this.apiService.getVideo(data.id);
+    }
+    if (!data.hasOwnProperty("originalTitle")) {
+      data.originalTitle = await this.apiService.getFilmInfo(data.id).then(data => data.originalTitle);
+    }
+    this.filmInfoModal.drawView(data);
+  }
+
   drawHeader() {
     this.header.drawView({
       authenticate: Boolean(this.user),
-      page: this.state.page,
+      page: this.state.url,
       librarySection: this.state.librarySection,
     });
   }
@@ -127,14 +147,14 @@ class App {
   };
 
   showHomePage() {
-    this.state.page = "home";
+    this.state.url = "home";
     this.state.pageNumber = 1;
     this.state.searchQuery = "";
     this.draw();
   }
 
   showLibraryPage() {
-    this.state.page = "library";
+    this.state.url = "library";
     this.state.librarySection = "watched";
     this.state.pageNumber = 1;
     this.draw();
@@ -170,11 +190,18 @@ class App {
     this.state.pageNumber = 1;
 
     this.drawContainer();
-  }
+  };
 
   handleChangeContainerPage = (page) => {
     this.state.pageNumber = page;
     this.drawContainer();
+  };
+
+  handleClickCard = (id) => {
+    const data = this.state.items.find(e => e.id === Number(id));
+    if (data) {
+      this.drawFilmInfoModal(data);
+    }
   }
 
   drawContainer() {
@@ -185,29 +212,30 @@ class App {
       if (!this.checkCode(code)) {
         return;
       }
-      this.showItems(res.finded, res.totalResults, res.page);
+      this.showItems(res.results, res.totalResults, res.page, res.totalPages);
     };
 
-    if (this.state.page === "home") {
+    if (this.state.url === "home") {
       if (!this.state.searchQuery) {
         this.apiService.getMostPopular(this.state.pageNumber).then(callback); // TODO timeWeek
         return;
       }
       this.apiService.searchMovie(this.state.searchQuery, this.state.pageNumber).then(callback);
-    } else if (this.state.page === "library") {
+    } else if (this.state.url === "library") {
       // TODO library
     }
 
   }
 
-  async showItems(items, totalItems, page) {
-    const genres = await this.apiService.getGenres();
+  showItems(items, totalItems, page, totalPages) {
+    this.state.totalPages = totalPages;
+    this.state.items = items;
 
-    const infoType = this.state.page === "home"
+    const infoType = this.state.url === "home"
       ? this.state.searchQuery
         ? "search"
         : "trend"
-      : this.state.page === "home" ? this.state.librarySection : "";
+      : this.state.url === "home" ? this.state.librarySection : "";
 
     this.containerInfo.drawView({
       type: infoType,
@@ -218,8 +246,7 @@ class App {
       items,
       totalItems,
       page,
-      genres,
-    })
+    });
   }
 
   getRandomCode() {

@@ -1,9 +1,9 @@
 import modalFormFilmTemplate from '../../partials/templates/modal-form-film.hbs';
+import { openModalWindow } from './openModalWindow';
 
 export class FilmModalWindow {
   constructor(targetSelector) {
     this.refs = this.getRefs(targetSelector);
-    //   this.keyPressCallbacks = new Set();
     this.showNextCallbacks = new Set();
     this.showPrevCallbacks = new Set();
   }
@@ -17,10 +17,11 @@ export class FilmModalWindow {
   drawView(data) {
     this.removeListeners();
     this.data = data;
-    this.refs.target.innerHTML = modalFormFilmTemplate({
+    openModalWindow(modalFormFilmTemplate({
       ...data,
+      genres: data.genres.join(", "),
       tab: data.tab || 'info',
-    });
+    }));
     this.addListeners();
   }
 
@@ -71,24 +72,20 @@ export class FilmModalWindow {
   showInfoTab = () => {
     this.data.tab = 'info';
     this.drawView(this.data);
-    console.log('showInfoTab');
   };
 
   showVideoTab = () => {
     this.data.tab = 'video';
     this.drawView(this.data);
-    console.log('showVideoTab');
   };
 
   showNext = () => {
-    console.log('next');
     for (const callback of this.showNextCallbacks) {
       callback();
     }
   };
 
   showPrev = () => {
-    console.log('prev');
     for (const callback of this.showPrevCallbacks) {
       callback();
     }
