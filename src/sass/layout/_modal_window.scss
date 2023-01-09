@@ -21,8 +21,8 @@ $accent-color: #818181;
   width: 320px;
   padding: 50px 20px 40px 20px;
   overflow-y: auto;
+  overflow-x: hidden;
   background-color: var(--primary-text-color-theme-dark);
-  overflow: hidden;
 
   @include media-from-tablet-resolution {
     width: 618px;
