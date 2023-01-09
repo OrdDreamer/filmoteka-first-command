@@ -61,7 +61,7 @@ export default class FilmotekaAPI {
             popularity: element.popularity,
             id: element.id,
             genres: element.genre_ids.map(id => this.getGenre(id)),
-            poster: element.poster_path ? `https://image.tmdb.org/t/p/original${element.poster_path}` : null,
+            poster: element.poster_path ? `https://image.tmdb.org/t/p/w400${element.poster_path}` : null,
           };
         }),
       };
@@ -82,7 +82,7 @@ export default class FilmotekaAPI {
         about: data.overview,
         genres: data.genres.map(genre => genre.name),
         release: data.release_date,
-        poster: data.poster_path ? `https://image.tmdb.org/t/p/original${data.poster_path}` : null,
+        poster: data.poster_path ? `https://image.tmdb.org/t/p/w400${data.poster_path}` : null,
         voteAverage: data.vote_average,
         voteCount: data.vote_count,
         popularity: data.popularity,
