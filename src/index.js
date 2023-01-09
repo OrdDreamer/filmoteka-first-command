@@ -13,7 +13,7 @@ import ContainerInfo from './js/view/ContainerInfo';
 import { initAboutTeam } from './js/view/team';
 import { initAnchors } from './js/view/anchor';
 import { FilmModalWindow } from './js/view/FilmModalWindow';
-import { initFavicon } from './js/view/animateFavicon'
+import { initFavicon } from './js/view/animateFavicon';
 import UserLibrary from './js/userLibrary';
 
 
@@ -27,9 +27,9 @@ class App {
     this.initUserLibrary();
 
     this.state = {
-      url: "home",
-      librarySection: "watched",
-      searchQuery: "",
+      url: 'home',
+      librarySection: 'watched',
+      searchQuery: '',
       pageNumber: 1,
       totalPages: 1,
       processCode: null,
@@ -42,7 +42,7 @@ class App {
     this.auth.onAuthStateChanged((res) => {
       this.preloader.hideLoader();
       this.user = res;
-      this.state.url = "home";
+      this.state.url = 'home';
       this.showAuthNotification();
       this.draw();
     });
@@ -56,7 +56,7 @@ class App {
     this.userLibrary = new UserLibrary(this.apiService);
     this.userLibrary.addListenerOnUpdate(() => {
       this.drawContainer();
-    })
+    });
   }
 
   initComponents() {
@@ -89,18 +89,46 @@ class App {
   }
 
   initContainerInfo() {
-    this.containerInfo = new ContainerInfo("#content-info");
+    this.containerInfo = new ContainerInfo('#content-info');
   }
 
   initContainer() {
-    this.itemContainer = new ItemContainer("#content");
+    this.itemContainer = new ItemContainer('#content');
     this.itemContainer.addListenerOnChangePage(this.handleChangeContainerPage);
     this.itemContainer.addListenerOnClickCard(this.handleClickCard);
   }
 
   initFilmInfoModal() {
     this.filmInfoModal = new FilmModalWindow();
+    this.filmInfoModal.addListenersOnShowPrev(this.showInfoModalPrev);
+    this.filmInfoModal.addListenersOnShowNext(this.showInfoModalNext);
   }
+
+  showInfoModalPrev = (currentId) => {
+    const currentIndex = this.state.items.findIndex(e => e.id === currentId);
+    if (currentIndex === 0) {
+      if (this.state.pageNumber === 1) return;
+      this.state.pageNumber -= 1;
+      this.drawContainer((data) => {
+        this.drawFilmInfoModal(data.results[data.results.length]);
+      });
+    } else {
+      this.drawFilmInfoModal(this.state.items[currentIndex - 1]);
+    }
+  };
+
+  showInfoModalNext = (currentId) => {
+    const currentIndex = this.state.items.findIndex(e => e.id === currentId);
+    if ((currentIndex + 1) === this.state.items.length) {
+      if (this.state.pageNumber === this.state.totalPages) return;
+      this.state.pageNumber += 1;
+      this.drawContainer((data) => {
+        this.drawFilmInfoModal(data.results[0]);
+      });
+    } else {
+      this.drawFilmInfoModal(this.state.items[currentIndex + 1]);
+    }
+  };
 
   draw() {
     this.itemContainer.clear();
@@ -111,10 +139,10 @@ class App {
   async drawFilmInfoModal(data) {
     this.preloader.showLoader();
 
-    if (!data.hasOwnProperty("videoSrc")) {
+    if (!data.hasOwnProperty('videoSrc')) {
       data.videoSrc = await this.apiService.getVideo(data.id);
     }
-    if (!data.hasOwnProperty("originalTitle")) {
+    if (!data.hasOwnProperty('originalTitle')) {
       data.originalTitle = await this.apiService.getFilmInfo(data.id).then(data => data.originalTitle);
     }
 
@@ -146,11 +174,11 @@ class App {
 
   handleChangePage = (page) => {
     switch (page) {
-      case "home":
+      case 'home':
         this.showHomePage();
         break;
 
-      case "library":
+      case 'library':
         this.showLibraryPage();
         break;
 
@@ -160,26 +188,26 @@ class App {
   };
 
   showHomePage() {
-    this.state.url = "home";
+    this.state.url = 'home';
     this.state.pageNumber = 1;
-    this.state.searchQuery = "";
+    this.state.searchQuery = '';
     this.draw();
   }
 
   showLibraryPage() {
-    this.state.url = "library";
-    this.state.librarySection = "watched";
+    this.state.url = 'library';
+    this.state.librarySection = 'watched';
     this.state.pageNumber = 1;
     this.draw();
   }
 
   handleChangeLibrarySection = (librarySection) => {
     switch (librarySection) {
-      case "watched":
+      case 'watched':
         this.showWatchedLibrarySection();
         break;
 
-      case "queue":
+      case 'queue':
         this.showQueueLibrarySection();
         break;
 
@@ -189,17 +217,17 @@ class App {
   };
 
   showWatchedLibrarySection() {
-    this.state.librarySection = "watched";
+    this.state.librarySection = 'watched';
     this.draw();
   }
 
   showQueueLibrarySection() {
-    this.state.librarySection = "queue";
+    this.state.librarySection = 'queue';
     this.draw();
   }
 
   handleSearchInput = (query) => {
-    this.state.searchQuery = query || "";
+    this.state.searchQuery = query || '';
     this.state.pageNumber = 1;
 
     this.drawContainer();
@@ -215,33 +243,36 @@ class App {
     if (data) {
       this.drawFilmInfoModal(data);
     }
-  }
+  };
 
-  drawContainer() {
+  drawContainer(callback = null) {
     this.containerInfo.clear();
 
     this.preloader.showLoader();
     const code = this.getRandomCode();
-    const callback = (res) => {
+    const handler = (res) => {
       if (!this.checkCode(code)) {
         return;
       }
-      this.showItems(res.results, res.totalResults, res.page, res.totalPages);
       this.preloader.hideLoader();
+      this.showItems(res.results, res.totalResults, res.page, res.totalPages);
+      if (callback) {
+        callback(res);
+      }
     };
 
-    if (this.state.url === "home") {
+    if (this.state.url === 'home') {
       if (!this.state.searchQuery) {
-        this.apiService.getMostPopular(this.state.pageNumber).then(callback);
+        this.apiService.getMostPopular(this.state.pageNumber).then(handler);
         return;
       }
-      this.apiService.searchMovie(this.state.searchQuery, this.state.pageNumber).then(callback);
-    } else if (this.state.url === "library") {
-      if (this.state.librarySection === "watched") {
-        this.userLibrary.getWatched(this.state.pageNumber).then(callback);
+      this.apiService.searchMovie(this.state.searchQuery, this.state.pageNumber).then(handler);
+    } else if (this.state.url === 'library') {
+      if (this.state.librarySection === 'watched') {
+        this.userLibrary.getWatched(this.state.pageNumber).then(handler);
         return;
       }
-      this.userLibrary.getQueue(this.state.pageNumber).then(callback);
+      this.userLibrary.getQueue(this.state.pageNumber).then(handler);
     }
   }
 
@@ -249,11 +280,11 @@ class App {
     this.state.totalPages = totalPages;
     this.state.items = items;
 
-    const infoType = this.state.url === "home"
+    const infoType = this.state.url === 'home'
       ? this.state.searchQuery
-        ? "search"
-        : "trend"
-      : this.state.url === "home" ? this.state.librarySection : "";
+        ? 'search'
+        : 'trend'
+      : this.state.url === 'home' ? this.state.librarySection : '';
 
     this.containerInfo.drawView({
       type: infoType,

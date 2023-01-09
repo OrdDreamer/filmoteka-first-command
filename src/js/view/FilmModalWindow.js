@@ -81,13 +81,13 @@ export class FilmModalWindow {
 
   showNext = () => {
     for (const callback of this.showNextCallbacks) {
-      callback();
+      callback(this.data.id);
     }
   };
 
   showPrev = () => {
     for (const callback of this.showPrevCallbacks) {
-      callback();
+      callback(this.data.id);
     }
   };
 
