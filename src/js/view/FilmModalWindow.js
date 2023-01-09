@@ -74,19 +74,19 @@ export class FilmModalWindow {
   }
 
   addToWatched = () => {
-    this.userLibrary.addToLibrary(this.data.id, true);
+    this.userLibrary.addToLibrary(this.data.id, this.data.title, true);
   };
 
   addToQueue = () => {
-    this.userLibrary.addToLibrary(this.data.id, false);
+    this.userLibrary.addToLibrary(this.data.id, this.data.title, false);
   };
 
   removeFromWatched = () => {
-    this.userLibrary.removeFromLibrary(this.data.id);
+    this.userLibrary.removeFromLibrary(this.data.id, this.data.title);
   };
 
   removeFromQueue = () => {
-    this.userLibrary.removeFromLibrary(this.data.id);
+    this.userLibrary.removeFromLibrary(this.data.id, this.data.title);
   };
 
   showInfoTab = () => {

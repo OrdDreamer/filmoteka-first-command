@@ -33,7 +33,7 @@ export default class UserLibrary {
     });
   }
 
-  addToLibrary(id, watched = false) {
+  addToLibrary(id, title, watched = false) {
     if (this.libraryData.findIndex(e => e[1].id === id) !== -1) {
       return;
     }
@@ -44,24 +44,24 @@ export default class UserLibrary {
       },
     )
       .then(() => {
-        this.notiflix.showSuccess(`Film id:${id} added to library (${watched ? 'watched' : 'queue'}).`);
+        this.notiflix.showSuccess(`Film "${title}" added to library (${watched ? 'watched' : 'queue'}).`);
       })
       .catch((error) => {
-        this.notiflix.showFailure(`Film id:${id} not added to library (${watched ? 'watched' : 'queue'}).`);
+        this.notiflix.showFailure(`Film "${title}" not added to library (${watched ? 'watched' : 'queue'}).`);
       });
   }
 
-  removeFromLibrary(id) {
+  removeFromLibrary(id, title) {
     const index = this.libraryData.findIndex(e => e[1].id === id);
     if (index === -1) {
       return;
     }
     remove(ref(this.db, 'users/' + this.user.uid + '/library/' + this.libraryData[index][0]))
       .then(() => {
-        this.notiflix.showSuccess(`Film id:${id} removed from library (${watched ? 'watched' : 'queue'}).`);
+        this.notiflix.showSuccess(`Film "${title}" removed from library (${watched ? 'watched' : 'queue'}).`);
       })
       .catch((error) => {
-        this.notiflix.showFailure(`Film id:${id} not removed from library (${watched ? 'watched' : 'queue'}).`);
+        this.notiflix.showFailure(`Film "${title}" not removed from library (${watched ? 'watched' : 'queue'}).`);
       });
   }
 
