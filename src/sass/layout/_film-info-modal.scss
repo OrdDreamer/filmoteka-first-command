@@ -44,7 +44,7 @@ $animation-duration: 250ms;
   @include media-from-tablet-resolution {
     width: 500px;
   }
-  
+
   @include media-from-desktop-resolution {
     width: 700px;
   }
@@ -259,13 +259,11 @@ $animation-duration: 250ms;
   text-decoration: none;
   display: inline-block;
   border-radius: 10px;
-  box-shadow: 0 0 40px 40px var(--accent-color) inset, 0 0 0 0 var(--accent-color);
-  color: white;
-  transition: box-shadow var(--transition-dur-and-fun);
+  background-color: #a1a1a1;
+  transition: background-color var(--transition-dur-and-fun);
 }
 .glow-button:hover {
-  box-shadow: 0 0 10px 0 var(--accent-color) inset, 0 0 10px 4px var(--accent-color);
-  color: var(--accent-color);
+  background-color: #737373;
 }
 
 @include media-in-mobile-resolution {
