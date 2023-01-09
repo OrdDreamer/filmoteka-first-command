@@ -13,6 +13,12 @@ export class FilmModalWindow {
   drawView(data) {
     this.removeListeners();
     this.data = data;
+    if (!this.data.hasOwnProperty("watched")) {
+      this.data.watched = this.userLibrary.isWatched();
+    }
+    if (!this.data.hasOwnProperty("queue")) {
+      this.data.queue = this.userLibrary.isQueue();
+    }
     openModalWindow(modalFormFilmTemplate({
       ...data,
       genres: data.genres.join(', '),
