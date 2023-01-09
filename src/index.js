@@ -14,6 +14,7 @@ import { initAboutTeam } from './js/view/team';
 import { initAnchors } from './js/view/anchor';
 import { FilmModalWindow } from './js/view/FilmModalWindow';
 import { initFavicon } from './js/view/animateFavicon'
+import UserLibrary from './js/userLibrary';
 
 
 class App {
@@ -23,6 +24,7 @@ class App {
     this.initComponents();
     this.initAPI();
     initFirebase();
+    this.initUserLibrary();
 
     this.state = {
       url: "home",
@@ -48,6 +50,13 @@ class App {
 
   initAPI() {
     this.apiService = new FilmotekaAPI();
+  }
+
+  initUserLibrary() {
+    this.userLibrary = new UserLibrary(this.apiService);
+    this.userLibrary.addListenerOnUpdate(() => {
+      this.drawContainer();
+    })
   }
 
   initComponents() {
@@ -221,14 +230,17 @@ class App {
 
     if (this.state.url === "home") {
       if (!this.state.searchQuery) {
-        this.apiService.getMostPopular(this.state.pageNumber).then(callback); // TODO timeWeek
+        this.apiService.getMostPopular(this.state.pageNumber).then(callback);
         return;
       }
       this.apiService.searchMovie(this.state.searchQuery, this.state.pageNumber).then(callback);
     } else if (this.state.url === "library") {
-      // TODO library
+      if (this.state.librarySection === "watched") {
+        this.userLibrary.getWatched(this.state.pageNumber).then(callback);
+        return;
+      }
+      this.userLibrary.getQueue(this.state.pageNumber).then(callback);
     }
-
   }
 
   showItems(items, totalItems, page, totalPages) {
