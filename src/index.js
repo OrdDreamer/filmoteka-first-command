@@ -110,13 +110,16 @@ class App {
   }
 
   async drawFilmInfoModal(data) {
-    console.log(data);
+    this.preloader.showLoader();
+
     if (!data.hasOwnProperty("videoSrc")) {
       data.videoSrc = await this.apiService.getVideo(data.id);
     }
     if (!data.hasOwnProperty("originalTitle")) {
       data.originalTitle = await this.apiService.getFilmInfo(data.id).then(data => data.originalTitle);
     }
+
+    this.preloader.hideLoader();
     this.filmInfoModal.drawView(data);
   }
 

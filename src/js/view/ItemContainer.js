@@ -37,13 +37,11 @@ export default class ItemContainer {
     }).join("");
     this.refs.target.innerHTML = this.template({ items: itemsMarkup });
 
-    if (data.totalItems === data.items.length) {
-      return;
+    if (data.totalItems !== data.items.length) {
+      this.pagination.setTotalItems(data.totalItems);
+      this.pagination.movePageTo(data.page);
+      this.refs.target.appendChild(this.paginationElement);
     }
-
-    this.pagination.setTotalItems(data.totalItems);
-    this.pagination.movePageTo(data.page);
-    this.refs.target.appendChild(this.paginationElement);
 
     this.addListeners();
   }
