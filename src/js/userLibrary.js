@@ -65,6 +65,18 @@ export default class UserLibrary {
       });
   }
 
+  isWatched(id) {
+    return this.libraryData.findIndex((e) => {
+      return !!(e[1].id === id && e[1].watched);
+    }) !== -1;
+  }
+
+  isQueue(id) {
+    return this.libraryData.findIndex((e) => {
+      return !!(e[1].id === id && !e[1].watched);
+    }) !== -1;
+  }
+
   async getWatched(page = 1) {
     const allWatched = this.libraryData
       .filter((e) => e[1].watched)
