@@ -1,6 +1,6 @@
 <div class='film-card {{customClasses}}'>
   {{#if poster}}
-  <img src='{{poster}}' alt=' {{imageDescription}}' class='filmoteka__image' />
+  <img src='{{poster}}' loading="lazy" alt=' {{imageDescription}}' class='filmoteka__image' />
   {{ else }}
   <div class='image-plug'></div>
   {{/if}}
