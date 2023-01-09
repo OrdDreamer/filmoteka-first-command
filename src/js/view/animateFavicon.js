@@ -1,8 +1,8 @@
 const link = document.getElementById('favicon');
 const link_ = document.getElementById('favicon_');
 
-const a = link.getAttribute('href');
-const b = link_.getAttribute('href');
+const a = link?.getAttribute('href');
+const b = link_?.getAttribute('href');
 
 export function initFavicon() {
   setInterval(() => {

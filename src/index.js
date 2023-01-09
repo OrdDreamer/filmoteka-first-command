@@ -69,7 +69,6 @@ class App {
 
     initAboutTeam();
     initAnchors();
-    initFavicon();
   }
 
   initNotification() {
