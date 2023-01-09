@@ -1,10 +1,11 @@
-import { getDatabase, onValue, push, ref } from 'firebase/database';
+import { getDatabase, onValue, push, ref, remove } from 'firebase/database';
 import { getAuth } from 'firebase/auth';
 
 export default class UserLibrary {
 
-  constructor(apiService) {
+  constructor(apiService, notiflix) {
     this.apiService = apiService;
+    this.notiflix = notiflix;
     this.updateCallbacks = new Set();
     this.libraryData = [];
 
@@ -27,31 +28,47 @@ export default class UserLibrary {
   initLibrary() {
     this.unsubscribe = onValue(this.ref, (snapshot) => {
       const data = snapshot.val();
-      this.libraryData = data ? Object.values(data) : [];
+      this.libraryData = data ? Object.entries(data) : [];
       this.onUpdate();
     });
   }
 
   addToLibrary(id, watched = false) {
-    if (this.libraryData.findIndex(e => e.id === id) !== -1) {
+    if (this.libraryData.findIndex(e => e[1].id === id) !== -1) {
       return;
     }
-    push(ref(this.db, 'users/' + this.user.uid + '/library'),
+    push(this.ref,
       {
         id,
         watched,
       },
     )
       .then(() => {
-        console.log(`Film id:${id} added to library (${watched ? 'watched' : 'queue'}).`);
+        this.notiflix.showSuccess(`Film id:${id} added to library (${watched ? 'watched' : 'queue'}).`);
       })
       .catch((error) => {
-        console.log(`Film id:${id} not added to library (${watched ? 'watched' : 'queue'}).`);
+        this.notiflix.showFailure(`Film id:${id} not added to library (${watched ? 'watched' : 'queue'}).`);
+      });
+  }
+
+  removeFromLibrary(id) {
+    const index = this.libraryData.findIndex(e => e[1].id === id);
+    if (index === -1) {
+      return;
+    }
+    remove(ref(this.db, 'users/' + this.user.uid + '/library/' + this.libraryData[index][0]))
+      .then(() => {
+        this.notiflix.showSuccess(`Film id:${id} removed from library (${watched ? 'watched' : 'queue'}).`);
+      })
+      .catch((error) => {
+        this.notiflix.showFailure(`Film id:${id} not removed from library (${watched ? 'watched' : 'queue'}).`);
       });
   }
 
   async getWatched(page = 1) {
-    const allWatched = this.libraryData.filter((e) => e.watched);
+    const allWatched = this.libraryData
+      .filter((e) => e[1].watched)
+      .map(e => e[1]);
     const itemsData = allWatched.slice((page - 1) * 20, page * 20);
 
     const promises = itemsData
@@ -78,7 +95,9 @@ export default class UserLibrary {
   }
 
   async getQueue(page = 1) {
-    const allQueue = this.libraryData.filter((e) => !e.watched);
+    const allQueue = this.libraryData
+      .filter((e) => !e[1].watched)
+      .map(e => e[1]);
     const itemsData = allQueue.slice((page - 1) * 20, page * 20);
 
     const promises = itemsData

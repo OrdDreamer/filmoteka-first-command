@@ -1,16 +1,12 @@
-import modalFormFilmTemplate from '../../partials/templates/modal-form-film.hbs';
+import modalFormFilmTemplate from '../../partials/templates/film-modal-window.hbs';
 import { openModalWindow } from './openModalWindow';
 
 export class FilmModalWindow {
-  constructor(targetSelector) {
-    this.refs = this.getRefs(targetSelector);
-    this.showNextCallbacks = new Set();
-    this.showPrevCallbacks = new Set();
-  }
-
-  getRefs(targetSelector) {
-    return {
-      target: document.querySelector(targetSelector),
+  constructor(userLibrary) {
+    this.userLibrary = userLibrary;
+    this.store = {
+      showNextCallbacks: new Set(),
+      showPrevCallbacks: new Set(),
     };
   }
 
@@ -19,7 +15,7 @@ export class FilmModalWindow {
     this.data = data;
     openModalWindow(modalFormFilmTemplate({
       ...data,
-      genres: data.genres.join(", "),
+      genres: data.genres.join(', '),
       tab: data.tab || 'info',
     }));
     this.addListeners();
@@ -27,47 +23,71 @@ export class FilmModalWindow {
 
   addListeners() {
     const tabInfoButton = document.querySelector('#tab-info');
-    if (tabInfoButton) {
-      tabInfoButton.addEventListener('click', this.showInfoTab);
-    }
+    tabInfoButton?.addEventListener('click', this.showInfoTab);
 
     const tabVideoButton = document.querySelector('#tab-video');
-    if (tabVideoButton) {
-      tabVideoButton.addEventListener('click', this.showVideoTab);
-    }
+    tabVideoButton?.addEventListener('click', this.showVideoTab);
 
     const arrowPrev = document.querySelector('#arrow-prev');
-    if (arrowPrev) {
-      arrowPrev.addEventListener('click', this.showPrev);
-    }
+    arrowPrev?.addEventListener('click', this.showPrev);
 
     const arrowNext = document.querySelector('#arrow-next');
-    if (arrowNext) {
-      arrowNext.addEventListener('click', this.showNext);
-    }
+    arrowNext?.addEventListener('click', this.showNext);
+
+    const addToWatched = document.querySelector('#add-to-watched');
+    addToWatched?.addEventListener('click', this.addToWatched);
+
+    const addToQueue = document.querySelector('#add-to-queue');
+    addToQueue?.addEventListener('click', this.addToQueue);
+
+    const removeFromWatched = document.querySelector('#remove-from-watched');
+    removeFromWatched?.addEventListener('click', this.removeFromWatched);
+
+    const removeFromQueue = document.querySelector('#remove-from-queue');
+    removeFromQueue?.addEventListener('click', this.removeFromQueue);
   }
 
   removeListeners() {
     const tabInfoButton = document.querySelector('#tab-info');
-    if (tabInfoButton) {
-      tabInfoButton.removeEventListener('click', this.showInfoTab);
-    }
+    tabInfoButton?.removeEventListener('click', this.showInfoTab);
 
     const tabVideoButton = document.querySelector('#tab-video');
-    if (tabVideoButton) {
-      tabVideoButton.removeEventListener('click', this.showVideoTab);
-    }
+    tabVideoButton?.removeEventListener('click', this.showVideoTab);
 
     const arrowPrev = document.querySelector('#arow-prev');
-    if (arrowPrev) {
-      arrowPrev.removeEventListener('click', this.showPrev);
-    }
+    arrowPrev?.removeEventListener('click', this.showPrev);
 
     const arrowNext = document.querySelector('#arow-next');
-    if (arrowNext) {
-      arrowNext.removeEventListener('click', this.showNext);
-    }
+    arrowNext?.removeEventListener('click', this.showNext);
+
+    const addToWatched = document.querySelector('#add-to-watched');
+    addToWatched?.removeEventListener('click', this.addToWatched);
+
+    const addToQueue = document.querySelector('#add-to-queue');
+    addToQueue?.removeEventListener('click', this.addToQueue);
+
+    const removeFromWatched = document.querySelector('#remove-from-watched');
+    removeFromWatched?.removeEventListener('click', this.removeFromWatched);
+
+    const removeFromQueue = document.querySelector('#remove-from-queue');
+    removeFromQueue?.removeEventListener('click', this.removeFromQueue);
   }
+
+  addToWatched = () => {
+    this.userLibrary.addToLibrary(this.data.id, true);
+  };
+
+  addToQueue = () => {
+    this.userLibrary.addToLibrary(this.data.id, false);
+  };
+
+  removeFromWatched = () => {
+    this.userLibrary.removeFromLibrary(this.data.id);
+  };
+
+  removeFromQueue = () => {
+    this.userLibrary.removeFromLibrary(this.data.id);
+  };
 
   showInfoTab = () => {
     this.data.tab = 'info';
@@ -80,26 +100,26 @@ export class FilmModalWindow {
   };
 
   showNext = () => {
-    for (const callback of this.showNextCallbacks) {
+    for (const callback of this.store.showNextCallbacks) {
       callback(this.data.id);
     }
   };
 
   showPrev = () => {
-    for (const callback of this.showPrevCallbacks) {
+    for (const callback of this.store.showPrevCallbacks) {
       callback(this.data.id);
     }
   };
 
   addListenersOnShowNext(callback) {
     if (typeof callback === 'function') {
-      this.showNextCallbacks.add(callback);
+      this.store.showNextCallbacks.add(callback);
     }
   }
 
   addListenersOnShowPrev(callback) {
     if (typeof callback === 'function') {
-      this.showPrevCallbacks.add(callback);
+      this.store.showPrevCallbacks.add(callback);
     }
   }
 }

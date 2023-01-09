@@ -13,18 +13,18 @@ import ContainerInfo from './js/view/ContainerInfo';
 import { initAboutTeam } from './js/view/team';
 import { initAnchors } from './js/view/anchor';
 import { FilmModalWindow } from './js/view/FilmModalWindow';
-import { initFavicon } from './js/view/animateFavicon';
 import UserLibrary from './js/userLibrary';
 
 
 class App {
 
   constructor() {
+    this.initNotification();
     this.initHandlebarsHelpers();
-    this.initComponents();
     this.initAPI();
     initFirebase();
     this.initUserLibrary();
+    this.initComponents();
 
     this.state = {
       url: 'home',
@@ -53,14 +53,13 @@ class App {
   }
 
   initUserLibrary() {
-    this.userLibrary = new UserLibrary(this.apiService);
+    this.userLibrary = new UserLibrary(this.apiService, this.notiflix);
     this.userLibrary.addListenerOnUpdate(() => {
       this.drawContainer();
     });
   }
 
   initComponents() {
-    this.initNotification();
     this.initPreloader();
     this.initHeader();
     this.initContainerInfo();
@@ -99,7 +98,7 @@ class App {
   }
 
   initFilmInfoModal() {
-    this.filmInfoModal = new FilmModalWindow();
+    this.filmInfoModal = new FilmModalWindow(this.userLibrary);
     this.filmInfoModal.addListenersOnShowPrev(this.showInfoModalPrev);
     this.filmInfoModal.addListenersOnShowNext(this.showInfoModalNext);
   }
