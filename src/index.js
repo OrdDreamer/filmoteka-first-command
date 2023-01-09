@@ -12,6 +12,7 @@ import ItemContainer from './js/view/ItemContainer';
 import ContainerInfo from './js/view/ContainerInfo';
 import { initAboutTeam } from './js/view/team';
 import { initAnchors } from './js/view/anchor';
+import {animateFavicon} from './js/view/animateFavicon'
 
 
 class App {
