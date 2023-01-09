@@ -1,4 +1,4 @@
-import { getDatabase, onValue, push, ref, remove } from 'firebase/database';
+import { getDatabase, onValue, push, ref, remove, update } from 'firebase/database';
 import { getAuth } from 'firebase/auth';
 
 export default class UserLibrary {
@@ -41,13 +41,32 @@ export default class UserLibrary {
       {
         id,
         watched,
-      },
+      }
     )
       .then(() => {
         this.notiflix.showSuccess(`Film "${title}" added to library (${watched ? 'watched' : 'queue'}).`);
       })
       .catch((error) => {
         this.notiflix.showFailure(`Film "${title}" not added to library (${watched ? 'watched' : 'queue'}).`);
+      });
+  }
+
+  updateInLibrary(id, title, watched = false) {
+    const index = this.libraryData.findIndex(e => e[1].id === id);
+    if (index === -1) {
+      return;
+    }
+    update(ref(this.db, 'users/' + this.user.uid + '/library/' + this.libraryData[index][0]),
+      {
+        id,
+        watched,
+      }
+    )
+      .then(() => {
+        this.notiflix.showSuccess(`Film "${title}" updated in library (${watched ? 'watched' : 'queue'}).`);
+      })
+      .catch((error) => {
+        this.notiflix.showFailure(`Film "${title}" not updated in library (${watched ? 'watched' : 'queue'}).`);
       });
   }
 

@@ -88,10 +88,18 @@ export class FilmModalWindow {
   }
 
   addToWatched = () => {
+    if (this.data.queue) {
+      this.userLibrary.updateInLibrary(this.data.id, this.data.title, true);
+      return;
+    }
     this.userLibrary.addToLibrary(this.data.id, this.data.title, true);
   };
 
   addToQueue = () => {
+    if (this.data.watched) {
+      this.userLibrary.updateInLibrary(this.data.id, this.data.title, false);
+      return;
+    }
     this.userLibrary.addToLibrary(this.data.id, this.data.title, false);
   };
 
