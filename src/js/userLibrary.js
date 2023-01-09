@@ -58,10 +58,10 @@ export default class UserLibrary {
     }
     remove(ref(this.db, 'users/' + this.user.uid + '/library/' + this.libraryData[index][0]))
       .then(() => {
-        this.notiflix.showSuccess(`Film "${title}" removed from library (${watched ? 'watched' : 'queue'}).`);
+        this.notiflix.showSuccess(`Film "${title}" removed from library.`);
       })
       .catch((error) => {
-        this.notiflix.showFailure(`Film "${title}" not removed from library (${watched ? 'watched' : 'queue'}).`);
+        this.notiflix.showFailure(`Film "${title}" not removed from library.`);
       });
   }
 

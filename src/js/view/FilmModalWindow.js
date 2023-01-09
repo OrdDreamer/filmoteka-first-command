@@ -14,10 +14,10 @@ export class FilmModalWindow {
     this.removeListeners();
     this.data = data;
     if (!this.data.hasOwnProperty("watched")) {
-      this.data.watched = this.userLibrary.isWatched();
+      this.data.watched = this.userLibrary.isWatched(data.id);
     }
     if (!this.data.hasOwnProperty("queue")) {
-      this.data.queue = this.userLibrary.isQueue();
+      this.data.queue = this.userLibrary.isQueue(data.id);
     }
     openModalWindow(modalFormFilmTemplate({
       ...data,
