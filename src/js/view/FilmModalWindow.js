@@ -11,19 +11,23 @@ export class FilmModalWindow {
   }
 
   drawView(data) {
-    this.removeListeners();
+    this.userLibrary.removeListenerOnUpdate(this.handleLibraryUpdate);
     this.data = data;
-    if (!this.data.hasOwnProperty("watched")) {
-      this.data.watched = this.userLibrary.isWatched(data.id);
-    }
-    if (!this.data.hasOwnProperty("queue")) {
-      this.data.queue = this.userLibrary.isQueue(data.id);
-    }
+    this.updateView();
+    this.userLibrary.addListenerOnUpdate(this.handleLibraryUpdate);
+  }
+
+  updateView() {
+    this.removeListeners();
+
+    this.data.watched = this.userLibrary.isWatched(this.data.id);
+    this.data.queue = this.userLibrary.isQueue(this.data.id);
     openModalWindow(modalFormFilmTemplate({
-      ...data,
-      genres: data.genres.join(', '),
-      tab: data.tab || 'info',
+      ...this.data,
+      genres: this.data.genres.join(', '),
+      tab: this.data.tab || 'info',
     }));
+
     this.addListeners();
   }
 
@@ -79,6 +83,10 @@ export class FilmModalWindow {
     removeFromQueue?.removeEventListener('click', this.removeFromQueue);
   }
 
+  handleLibraryUpdate = () => {
+    this.updateView();
+  }
+
   addToWatched = () => {
     this.userLibrary.addToLibrary(this.data.id, this.data.title, true);
   };
@@ -97,12 +105,12 @@ export class FilmModalWindow {
 
   showInfoTab = () => {
     this.data.tab = 'info';
-    this.drawView(this.data);
+    this.updateView();
   };
 
   showVideoTab = () => {
     this.data.tab = 'video';
-    this.drawView(this.data);
+    this.updateView();
   };
 
   showNext = () => {

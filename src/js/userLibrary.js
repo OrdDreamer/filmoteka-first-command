@@ -58,7 +58,7 @@ export default class UserLibrary {
     }
     remove(ref(this.db, 'users/' + this.user.uid + '/library/' + this.libraryData[index][0]))
       .then(() => {
-        this.notiflix.showSuccess(`Film "${title}" removed from library.`);
+        this.notiflix.showInfo(`Film "${title}" removed from library.`);
       })
       .catch((error) => {
         this.notiflix.showFailure(`Film "${title}" not removed from library.`);
@@ -138,6 +138,12 @@ export default class UserLibrary {
   addListenerOnUpdate(callback) {
     if (typeof callback === 'function') {
       this.updateCallbacks.add(callback);
+    }
+  }
+
+  removeListenerOnUpdate(callback) {
+    if (typeof callback === 'function') {
+      this.updateCallbacks.delete(callback);
     }
   }
 
