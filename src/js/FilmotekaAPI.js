@@ -29,7 +29,7 @@ export default class FilmotekaAPI {
             popularity: element.popularity,
             id: element.id,
             genres: element.genre_ids.map(id => this.getGenre(id)),
-            poster: element.poster_path ? `https://image.tmdb.org/t/p/original${element.poster_path}` : null,
+            poster: element.poster_path ? `https://image.tmdb.org/t/p/w400${element.poster_path}` : null,
           };
         }),
       };
@@ -116,7 +116,7 @@ export default class FilmotekaAPI {
     return indexArr.indexOf(min);
   }
 
-  async getPoster(movie_id, posterWidth = 500) {
+  async getPoster(movie_id, posterWidth = 400) {
     try {
       const response = await axios.get(`movie/${movie_id}/images?api_key=${API_KEY}`);
       console.log(response);
