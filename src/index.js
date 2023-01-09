@@ -13,7 +13,7 @@ import ContainerInfo from './js/view/ContainerInfo';
 import { initAboutTeam } from './js/view/team';
 import { initAnchors } from './js/view/anchor';
 import { FilmModalWindow } from './js/view/FilmModalWindow';
-import {animateFavicon} from './js/view/animateFavicon'
+import { initFavicon } from './js/view/animateFavicon'
 
 
 class App {
@@ -60,6 +60,7 @@ class App {
 
     initAboutTeam();
     initAnchors();
+    initFavicon();
   }
 
   initNotification() {
