@@ -209,12 +209,14 @@ class App {
   drawContainer() {
     this.containerInfo.clear();
 
+    this.preloader.showLoader();
     const code = this.getRandomCode();
     const callback = (res) => {
       if (!this.checkCode(code)) {
         return;
       }
       this.showItems(res.results, res.totalResults, res.page, res.totalPages);
+      this.preloader.hideLoader();
     };
 
     if (this.state.url === "home") {
