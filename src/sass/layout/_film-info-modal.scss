@@ -39,7 +39,15 @@ $animation-duration: 250ms;
 }
 
 .film-modal-content-container {
+  width: 240px;
 
+  @include media-from-tablet-resolution {
+    width: 500px;
+  }
+  
+  @include media-from-desktop-resolution {
+    width: 700px;
+  }
 }
 
 @include media-in-mobile-resolution {
@@ -93,6 +101,7 @@ $animation-duration: 250ms;
   margin: 0;
   border-bottom: 1px solid #e0e0e0;
   border: none;
+  margin-bottom: 10px;
 }
 
 .tabs__btn {
@@ -331,8 +340,16 @@ $animation-duration: 250ms;
   margin-top: 20px;
   --bs-aspect-ratio: calc(9 / 16 * 100%);
   position: relative;
-  width: 100%;
   height: 100%;
+  width: 240px;
+
+  @include media-from-tablet-resolution{
+    width: 500px;
+  }
+
+  @include media-from-desktop-resolution {
+    width: 700px;
+  }
 }
 
 .iframe::before {
