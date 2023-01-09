@@ -1,4 +1,4 @@
-<div class='film-card {{customClasses}}' data-id='${{filmId}}'>
+<div class='film-card {{customClasses}}'>
   {{#if poster}}
   <img src='{{poster}}' alt=' {{imageDescription}}' class='filmoteka__image' />
   {{ else }}
@@ -11,4 +11,5 @@
     <span class='film-card__year'> {{year}}</span>
     <span class='film-card__rating'>{{rating}}</span>
   </p>
+  <div data-id='{{filmId}}' class='click-trap'></div>
 </div>

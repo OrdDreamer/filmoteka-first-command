@@ -30,6 +30,7 @@ class App {
       pageNumber: 1,
       totalPages: 1,
       processCode: null,
+      items: [],
     };
 
     this.auth = getAuth();
@@ -54,6 +55,7 @@ class App {
     this.initHeader();
     this.initContainerInfo();
     this.initContainer();
+    this.initFilmInfoModal();
 
     initAboutTeam();
     initAnchors();
@@ -83,12 +85,28 @@ class App {
   initContainer() {
     this.itemContainer = new ItemContainer("#content");
     this.itemContainer.addListenerOnChangePage(this.handleChangeContainerPage);
+    this.itemContainer.addListenerOnClickCard(this.handleClickCard);
+  }
+
+  initFilmInfoModal() {
+    this.filmInfoModal = new FilmModalWindow();
   }
 
   draw() {
     this.itemContainer.clear();
     this.drawHeader();
     this.drawContainer();
+  }
+
+  async drawFilmInfoModal(data) {
+    console.log(data);
+    if (!data.hasOwnProperty("videoSrc")) {
+      data.videoSrc = await this.apiService.getVideo(data.id);
+    }
+    if (!data.hasOwnProperty("originalTitle")) {
+      data.originalTitle = await this.apiService.getFilmInfo(data.id).then(data => data.originalTitle);
+    }
+    this.filmInfoModal.drawView(data);
   }
 
   drawHeader() {
@@ -179,6 +197,13 @@ class App {
     this.drawContainer();
   };
 
+  handleClickCard = (id) => {
+    const data = this.state.items.find(e => e.id === Number(id));
+    if (data) {
+      this.drawFilmInfoModal(data);
+    }
+  }
+
   drawContainer() {
     this.containerInfo.clear();
 
@@ -204,6 +229,7 @@ class App {
 
   showItems(items, totalItems, page, totalPages) {
     this.state.totalPages = totalPages;
+    this.state.items = items;
 
     const infoType = this.state.url === "home"
       ? this.state.searchQuery

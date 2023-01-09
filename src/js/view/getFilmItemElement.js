@@ -14,7 +14,6 @@ export function getFilmItemElement(data, customClasses = "") {
 }
 
 function getGenresStr(genresArray) {
-  console.log(genresArray);
   if ((genresArray.length === 1)) {
     return `${genresArray[0]}`;
   }
