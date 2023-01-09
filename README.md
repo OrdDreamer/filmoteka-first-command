@@ -43,8 +43,8 @@
 :pushpin: прокачали скіли злагодженої роботи в команді
 
 
-## Завдяки нашим старанням отримав життя додаток [:point_right::film_strip:_Фільмотека_:point_left:](https://orddreamer.github.io/filmoteka-first-command/)
+## Завдяки нашим старанням отримав життя додаток [:point_right: :film_strip:_Фільмотека_ :point_left:](https://orddreamer.github.io/filmoteka-first-command/)
 
-<a href="https://orddreamer.github.io/filmoteka-first-command/"><img src="./src/image/header/background-library-desktop-1x.png" alt="Filmoteka" border="0"></a>
+<a href="https://orddreamer.github.io/filmoteka-first-command/"><img src="./src/images/header/background-library-desktop-1x.png" alt="Filmoteka" border="0"></a>
 
 _Ми щасливі, що можемо рости і працювати, робити цей світ досконалішим, і віримо, що попереду - найкраще!_:dizzy:
